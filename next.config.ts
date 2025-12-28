@@ -9,12 +9,8 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
 
-  // Optional: Add trailing slash for consistent URLs
+  // Add trailing slash for consistent URLs
   trailingSlash: true,
-
-  // Configure base path if your repo name is not the username
-  // For example: basePath: '/repo-name' if deploying to github.io/repo-name
-  // basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
 };
 
 export default nextConfig;
