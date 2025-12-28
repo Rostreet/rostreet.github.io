@@ -18,16 +18,35 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>('');
 
   useEffect(() => {
+    // 生成 slug 的函数（与文章页面的 Heading 组件保持一致）
+    const generateSlug = (text: string, index: number): string => {
+      const slug = text
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-')
+        .replace(/^-+|-+$/g, ''); // 移除开头和结尾的连字符
+
+      // 如果生成的 slug 为空，使用索引作为 ID
+      return slug || `heading-${index}`;
+    };
+
     // 提取标题
     const lines = content.split('\n');
     const extractedHeadings: Heading[] = [];
+    const usedIds = new Set<string>();
 
     lines.forEach((line, index) => {
       const trimmed = line.trim();
       let level = 0;
       let text = '';
 
-      if (trimmed.startsWith('### ')) {
+      if (trimmed.startsWith('#### ')) {
+        level = 4;
+        text = trimmed.substring(5);
+      } else if (trimmed.startsWith('### ')) {
         level = 3;
         text = trimmed.substring(4);
       } else if (trimmed.startsWith('## ')) {
@@ -39,8 +58,18 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
       }
 
       if (level > 0 && text) {
-        const id = `heading-${index}`;
-        extractedHeadings.push({ id, text, level });
+        let id = generateSlug(text, index);
+
+        // 如果 ID 已存在，添加后缀使其唯一
+        let counter = 1;
+        let uniqueId = id;
+        while (usedIds.has(uniqueId)) {
+          uniqueId = `${id}-${counter}`;
+          counter++;
+        }
+
+        usedIds.add(uniqueId);
+        extractedHeadings.push({ id: uniqueId, text, level });
       }
     });
 
@@ -115,6 +144,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
               ${heading.level === 1 ? 'ml-0 font-semibold' : ''}
               ${heading.level === 2 ? 'ml-4' : ''}
               ${heading.level === 3 ? 'ml-8 text-xs' : ''}
+              ${heading.level === 4 ? 'ml-12 text-xs' : ''}
             `}
           >
             {heading.text}

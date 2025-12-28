@@ -1,4 +1,4 @@
-import { Github, Twitter, Mail } from 'lucide-react';
+import { Github, Twitter } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,11 +13,6 @@ export default function Footer() {
       name: 'Twitter',
       href: 'https://twitter.com',
       icon: Twitter,
-    },
-    {
-      name: 'Email',
-      href: 'mailto:hello@example.com',
-      icon: Mail,
     },
   ];
 

@@ -2,8 +2,21 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Calendar, Clock, Search, X } from 'lucide-react';
+import { Calendar, Clock, Search, X, Mail, Github } from 'lucide-react';
 import PostCardSkeleton from '@/components/PostCardSkeleton';
+
+// iconfont.cn 图标组件
+const BilibiliIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor">
+    <path d="M306.76 909.227c63.08 0 98.487-27.574 119.251-73.98l-253.615-152.168C117.587 686.96 64.436 621.506 17.72 524.56 5.236 497.893 0 475.453 0 456.107V342.55c0-35.936 5.237-67.84 15.474-95.7l252.625-151.594c-19.76-46.021-55.027-73.334-117.538-73.334zM381.4 310.868l-275.395 165.29c-33.794 20.294-55.547 57.013-55.547 97.125v180.19c0 84.197 68.473 152.44 153.025 152.44 40.227 0 77.213-15.636 105.092-41.136l277.5-166.487c-50.987-34.867-85.675-93.134-85.675-159.687 0-66.036 34.347-124.043 84.625-158.757l-0.126-0.083z m340.96 0c50.278 34.714 84.624 92.72 84.624 158.756 0 66.553-34.687 124.82-85.674 159.687l277.5 166.487c27.88 25.5 64.865 41.136 105.092 41.136 84.552 0 153.025-68.243 153.025-152.44v-180.19c0-40.112-21.753-76.83-55.547-97.125L587.352 310.868c50.987 34.867 85.675 93.134 85.675 159.687 0-66.036-34.347-124.043-84.625-158.757l0.125 0.083z" />
+  </svg>
+);
+
+const JuejinIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor">
+    <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 768-448 768-247.4 0-448-200.6-448-448zm0 832c-212.1 0-384-171.9-384-384s171.9-384 384-384 384 171.9 384 384-171.9 384-384 384zm200.7-495.1l-245.1 185.2c-3.2 2.4-8 2.4-11.2 0L211.3 400.9c-4.5-3.4-5.5-9.8-2.1-14.3 3.4-4.5 9.8-5.5 14.3-2.1l248.8 188c2.7 2 6 2.9 9.3 1.6 3.3-1.3 5.3-4.8 4.3-8.3L403.1 347.6c-4.5-1-9.1 1.8-10.1 6.3-1 4.5 1.8 9.1 6.3 10.1l313.4 71.6c1.1 0.3 2.3 0.4 3.4 0.1 3.2-0.9 5.3-3.8 4.6-7l-3.3-15.8z" />
+  </svg>
+);
 
 const POSTS_PER_PAGE = 10;
 
@@ -107,34 +120,49 @@ export default function Home() {
               </div>
               <h2 className="text-2xl font-bold mb-2">Zhai Changhao</h2>
               <p className="text-muted-foreground text-sm mb-4">全栈开发者</p>
+
+              {/* 联系方式 - 只显示图标 */}
+              <div className="flex justify-center gap-3 mb-4">
+                <a
+                  href="mailto:hello@example.com"
+                  className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200 text-muted-foreground hover:text-foreground"
+                  aria-label="Email"
+                >
+                  <Mail className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200 text-muted-foreground hover:text-foreground"
+                  aria-label="GitHub"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://bilibili.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200 text-muted-foreground hover:text-foreground"
+                  aria-label="Bilibili"
+                >
+                  <BilibiliIcon className="w-4 h-4" />
+                </a>
+                <a
+                  href="https://juejin.cn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200 text-muted-foreground hover:text-foreground"
+                  aria-label="稀土掘金"
+                >
+                  <JuejinIcon className="w-4 h-4" />
+                </a>
+              </div>
+
               <div className="border-t border-border/40 pt-4">
                 <p className="text-sm italic text-muted-foreground">
                   &quot;代码改变世界，创新驱动未来&quot;
                 </p>
-              </div>
-            </div>
-
-            {/* 简介卡片 */}
-            <div className="border border-border/40 rounded-xl p-6 bg-card">
-              <h3 className="text-lg font-bold mb-3">关于我</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                热爱编程，专注于 Web 开发技术。喜欢探索新技术，分享学习心得。
-                在这里记录我的技术成长轨迹。
-              </p>
-            </div>
-
-            {/* 技术栈 */}
-            <div className="border border-border/40 rounded-xl p-6 bg-card">
-              <h3 className="text-lg font-bold mb-3">技术栈</h3>
-              <div className="flex flex-wrap gap-2">
-                {['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'PostgreSQL'].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 rounded-lg bg-accent text-foreground text-xs font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
               </div>
             </div>
           </div>

@@ -1,9 +1,57 @@
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import ReadingProgressBar from '@/components/ReadingProgressBar';
 import BackToTop from '@/components/BackToTop';
 import TableOfContents from '@/components/TableOfContents';
 import ShareButton from '@/components/ShareButton';
+
+// 自定义标题组件，添加 ID 用于目录导航
+// 使用全局 Map 来跟踪已使用的 ID，确保唯一性
+const usedHeadingIds = new Map<string, number>();
+
+function Heading({ level, children, node, ...props }: any) {
+  const generateId = (text: string): string => {
+    const baseId = text
+      .toString()
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '')
+      .replace(/\-\-+/g, '-')
+      .replace(/^-+|-+$/g, ''); // 移除开头和结尾的连字符
+
+    // 如果生成的 ID 为空，使用随机字符串
+    const id = baseId || `heading-${Math.random().toString(36).substr(2, 9)}`;
+
+    // 确保 ID 唯一
+    const count = usedHeadingIds.get(id) || 0;
+    usedHeadingIds.set(id, count + 1);
+
+    return count > 0 ? `${id}-${count}` : id;
+  };
+
+  // 提取文本内容
+  const getTextContent = (node: any): string => {
+    if (typeof node === 'string') return node;
+    if (typeof node === 'number') return node.toString();
+    if (Array.isArray(node)) return node.map(getTextContent).filter(Boolean).join('');
+    if (node?.props?.children) return getTextContent(node.props.children);
+    return '';
+  };
+
+  const text = getTextContent(children) || '';
+  const id = generateId(text);
+
+  const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+
+  return (
+    <Tag id={id} className="scroll-mt-20">
+      {children}
+    </Tag>
+  );
+}
 
 // 模拟文章数据
 const posts: Record<string, any> = {
@@ -494,92 +542,35 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </header>
 
         {/* Article Content */}
-        <div className="prose prose-lg dark:prose-invert max-w-none">
-          <div className="border-t border-border/40 pt-8">
-            {post.content.split('\n').map((paragraph: string, index: number) => {
-              const trimmed = paragraph.trim();
-
-              // 跳过空行
-              if (!trimmed) return null;
-
-              // 处理代码块
-              if (trimmed.startsWith('```')) {
-                return null;
-              }
-
-              // 处理列表项（带 - 或 *）
-              if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
-                return (
-                  <li key={index} className="ml-6 mt-2 text-muted-foreground">
-                    {trimmed.substring(2)}
-                  </li>
-                );
-              }
-
-              // 处理数字列表
-              if (trimmed.match(/^\d+\./)) {
-                return (
-                  <li key={index} className="ml-6 mt-2 text-muted-foreground">
-                    {trimmed.replace(/^\d+\.\s*/, '')}
-                  </li>
-                );
-              }
-
-              // 处理三级标题
-              if (trimmed.startsWith('### ')) {
-                return (
-                  <h3 id={`heading-${index}`} key={index} className="text-xl font-bold mt-8 mb-4 text-foreground scroll-mt-20">
-                    {trimmed.substring(4)}
-                  </h3>
-                );
-              }
-
-              // 处理二级标题
-              if (trimmed.startsWith('## ')) {
-                return (
-                  <h2 id={`heading-${index}`} key={index} className="text-2xl font-bold mt-8 mb-4 text-foreground scroll-mt-20">
-                    {trimmed.substring(3)}
-                  </h2>
-                );
-              }
-
-              // 处理一级标题
-              if (trimmed.startsWith('# ')) {
-                return (
-                  <h1 id={`heading-${index}`} key={index} className="text-3xl font-bold mt-8 mb-4 first:mt-0 text-foreground scroll-mt-20">
-                    {trimmed.substring(2)}
-                  </h1>
-                );
-              }
-
-              // 处理代码行（包含 ``` 的行已经在上面处理）
-              if (trimmed.includes('```')) {
-                return null;
-              }
-
-              // 处理带代码的段落
-              if (trimmed.includes('`')) {
-                const parts = trimmed.split('`');
-                return (
-                  <p key={index} className="mb-4 leading-7 text-muted-foreground">
-                    {parts.map((part, i) => {
-                      if (i % 2 === 1) {
-                        // 这是代码部分
-                        return <code key={i} className="px-1.5 py-0.5 rounded bg-accent text-foreground text-sm font-mono">{part}</code>;
-                      }
-                      return part;
-                    })}
-                  </p>
-                );
-              }
-
-              // 处理普通段落
-              return (
-                <p key={index} className="mb-4 leading-7 text-muted-foreground">
-                  {trimmed}
-                </p>
-              );
-            })}
+        <div className="border-t border-border/40 pt-8">
+          <div className="prose prose-lg dark:prose-invert max-w-none
+            prose-headings:font-bold prose-headings:text-foreground
+            prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-4 prose-h1:first:mt-0
+            prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+            prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
+            prose-p:text-muted-foreground prose-p:leading-7 prose-p:mb-4
+            prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-foreground prose-strong:font-semibold
+            prose-code:text-foreground prose-code:bg-accent prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+            prose-pre:bg-muted prose-pre:border prose-pre:border-border/40
+            prose-ul:text-muted-foreground prose-ul:ml-6
+            prose-ol:text-muted-foreground prose-ol:ml-6
+            prose-li:text-muted-foreground
+            prose-blockquote:border-l-4 prose-blockquote:border-border/40 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground
+          ">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: (props) => <Heading level={1} {...props} />,
+                h2: (props) => <Heading level={2} {...props} />,
+                h3: (props) => <Heading level={3} {...props} />,
+                h4: (props) => <Heading level={4} {...props} />,
+                h5: (props) => <Heading level={5} {...props} />,
+                h6: (props) => <Heading level={6} {...props} />,
+              }}
+            >
+              {post.content}
+            </ReactMarkdown>
           </div>
         </div>
 
