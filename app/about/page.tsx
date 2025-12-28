@@ -1,25 +1,26 @@
-import { Mail, MapPin, Github, Twitter, Linkedin } from 'lucide-react';
-import Link from 'next/link';
+import { Mail, MapPin, Github } from "lucide-react";
+import Link from "next/link";
+import { BilibiliIcon, JuejinIcon } from "@/components/Icons";
 
 export default function AboutPage() {
   const skills = [
-    'React / Next.js',
-    'TypeScript',
-    'Node.js',
-    'Python',
-    'PostgreSQL',
-    'Docker',
-    'AWS',
-    'Git',
+    "React / Next.js",
+    "TypeScript",
+    "Node.js",
+    "Python",
+    "PostgreSQL",
+    "Docker",
+    "AWS",
+    "Git",
   ];
 
   const interests = [
-    'Web 开发',
-    '系统设计',
-    '开源项目',
-    '技术写作',
-    '用户体验设计',
-    '性能优化',
+    "Web 开发",
+    "系统设计",
+    "开源项目",
+    "技术写作",
+    "用户体验设计",
+    "性能优化",
   ];
 
   return (
@@ -43,8 +44,8 @@ export default function AboutPage() {
               <h2 className="text-2xl font-bold mb-4">简介</h2>
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  你好！我是一名全栈开发者，专注于构建高质量、用户友好的 Web 应用。
-                  我对新技术充满热情，喜欢探索和尝试各种编程语言和框架。
+                  你好！我是一名全栈开发者，专注于构建高质量、用户友好的 Web
+                  应用。 我对新技术充满热情，喜欢探索和尝试各种编程语言和框架。
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   在日常工作中，我主要使用 React、Next.js 和 Node.js 进行开发，
@@ -119,22 +120,22 @@ export default function AboutPage() {
                     <Github className="w-5 h-5" />
                   </a>
                   <a
-                    href="https://twitter.com"
+                    href="https://bilibili.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200"
-                    aria-label="Twitter"
+                    aria-label="Bilibili"
                   >
-                    <Twitter className="w-5 h-5" />
+                    <BilibiliIcon className="w-5 h-5" />
                   </a>
                   <a
-                    href="https://linkedin.com"
+                    href="https://juejin.cn"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200"
-                    aria-label="LinkedIn"
+                    aria-label="稀土掘金"
                   >
-                    <Linkedin className="w-5 h-5" />
+                    <JuejinIcon className="w-5 h-5" />
                   </a>
                 </div>
               </div>
@@ -145,15 +146,21 @@ export default function AboutPage() {
               <h3 className="text-lg font-bold mb-4">统计</h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">文章数量</span>
+                  <span className="text-sm text-muted-foreground">
+                    文章数量
+                  </span>
                   <span className="text-sm font-medium">5+</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">项目经验</span>
+                  <span className="text-sm text-muted-foreground">
+                    项目经验
+                  </span>
                   <span className="text-sm font-medium">3年+</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">开源贡献</span>
+                  <span className="text-sm text-muted-foreground">
+                    开源贡献
+                  </span>
                   <span className="text-sm font-medium">活跃</span>
                 </div>
               </div>

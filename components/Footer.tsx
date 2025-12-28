@@ -1,18 +1,29 @@
-import { Github, Twitter } from 'lucide-react';
+import { Github, Mail } from "lucide-react";
+import { BilibiliIcon, JuejinIcon } from "./Icons";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
     {
-      name: 'GitHub',
-      href: 'https://github.com',
+      name: "Email",
+      href: "mailto:hello@example.com",
+      icon: Mail,
+    },
+    {
+      name: "GitHub",
+      href: "https://github.com",
       icon: Github,
     },
     {
-      name: 'Twitter',
-      href: 'https://twitter.com',
-      icon: Twitter,
+      name: "Bilibili",
+      href: "https://bilibili.com",
+      icon: BilibiliIcon,
+    },
+    {
+      name: "稀土掘金",
+      href: "https://juejin.cn",
+      icon: JuejinIcon,
     },
   ];
 

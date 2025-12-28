@@ -1,60 +1,54 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { Calendar, Clock, Search, X, Mail, Github } from 'lucide-react';
-import PostCardSkeleton from '@/components/PostCardSkeleton';
-
-// iconfont.cn 图标组件
-const BilibiliIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor">
-    <path d="M306.76 909.227c63.08 0 98.487-27.574 119.251-73.98l-253.615-152.168C117.587 686.96 64.436 621.506 17.72 524.56 5.236 497.893 0 475.453 0 456.107V342.55c0-35.936 5.237-67.84 15.474-95.7l252.625-151.594c-19.76-46.021-55.027-73.334-117.538-73.334zM381.4 310.868l-275.395 165.29c-33.794 20.294-55.547 57.013-55.547 97.125v180.19c0 84.197 68.473 152.44 153.025 152.44 40.227 0 77.213-15.636 105.092-41.136l277.5-166.487c-50.987-34.867-85.675-93.134-85.675-159.687 0-66.036 34.347-124.043 84.625-158.757l-0.126-0.083z m340.96 0c50.278 34.714 84.624 92.72 84.624 158.756 0 66.553-34.687 124.82-85.674 159.687l277.5 166.487c27.88 25.5 64.865 41.136 105.092 41.136 84.552 0 153.025-68.243 153.025-152.44v-180.19c0-40.112-21.753-76.83-55.547-97.125L587.352 310.868c50.987 34.867 85.675 93.134 85.675 159.687 0-66.036-34.347-124.043-84.625-158.757l0.125 0.083z" />
-  </svg>
-);
-
-const JuejinIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor">
-    <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 768-448 768-247.4 0-448-200.6-448-448zm0 832c-212.1 0-384-171.9-384-384s171.9-384 384-384 384 171.9 384 384-171.9 384-384 384zm200.7-495.1l-245.1 185.2c-3.2 2.4-8 2.4-11.2 0L211.3 400.9c-4.5-3.4-5.5-9.8-2.1-14.3 3.4-4.5 9.8-5.5 14.3-2.1l248.8 188c2.7 2 6 2.9 9.3 1.6 3.3-1.3 5.3-4.8 4.3-8.3L403.1 347.6c-4.5-1-9.1 1.8-10.1 6.3-1 4.5 1.8 9.1 6.3 10.1l313.4 71.6c1.1 0.3 2.3 0.4 3.4 0.1 3.2-0.9 5.3-3.8 4.6-7l-3.3-15.8z" />
-  </svg>
-);
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { Calendar, Clock, Search, X, Mail, Github } from "lucide-react";
+import PostCardSkeleton from "@/components/PostCardSkeleton";
+import { BilibiliIcon, JuejinIcon } from "@/components/Icons";
 
 const POSTS_PER_PAGE = 10;
 
 const allPosts = [
   {
     id: 1,
-    slug: 'getting-started-with-nextjs',
-    title: '开始使用 Next.js 构建现代化应用',
-    excerpt: '探索 Next.js 15 的强大功能，包括服务端组件、App Router 以及最新的性能优化特性。了解如何使用这个强大的 React 框架构建高性能的 Web 应用。',
-    date: '2024-12-28',
-    readTime: '5 分钟',
-    category: '前端开发',
+    slug: "getting-started-with-nextjs",
+    title: "开始使用 Next.js 构建现代化应用",
+    excerpt:
+      "探索 Next.js 15 的强大功能，包括服务端组件、App Router 以及最新的性能优化特性。了解如何使用这个强大的 React 框架构建高性能的 Web 应用。",
+    date: "2024-12-28",
+    readTime: "5 分钟",
+    category: "前端开发",
   },
   {
     id: 2,
-    slug: 'understanding-react-server-components',
-    title: '深入理解 React Server Components',
-    excerpt: 'React Server Components 彻底改变了我们构建 React 应用的方式。让我们深入了解其工作原理、使用场景以及最佳实践。',
-    date: '2024-12-27',
-    readTime: '8 分钟',
-    category: 'React',
+    slug: "understanding-react-server-components",
+    title: "深入理解 React Server Components",
+    excerpt:
+      "React Server Components 彻底改变了我们构建 React 应用的方式。让我们深入了解其工作原理、使用场景以及最佳实践。",
+    date: "2024-12-27",
+    readTime: "8 分钟",
+    category: "React",
   },
   {
     id: 3,
-    slug: 'typescript-best-practices',
-    title: 'TypeScript 最佳实践指南',
-    excerpt: '提升你的 TypeScript 代码质量，学习类型系统的高级用法、泛型、条件类型和常见模式的实现。',
-    date: '2024-12-26',
-    readTime: '6 分钟',
-    category: 'TypeScript',
+    slug: "typescript-best-practices",
+    title: "TypeScript 最佳实践指南",
+    excerpt:
+      "提升你的 TypeScript 代码质量，学习类型系统的高级用法、泛型、条件类型和常见模式的实现。",
+    date: "2024-12-26",
+    readTime: "6 分钟",
+    category: "TypeScript",
   },
 ];
 
-const categories = ['全部', ...Array.from(new Set(allPosts.map(post => post.category)))];
+const categories = [
+  "全部",
+  ...Array.from(new Set(allPosts.map((post) => post.category))),
+];
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState('全部');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("全部");
+  const [searchQuery, setSearchQuery] = useState("");
   const [displayedPosts, setDisplayedPosts] = useState<typeof allPosts>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -62,9 +56,11 @@ export default function Home() {
   const observerTarget = useRef<HTMLDivElement>(null);
 
   // 筛选文章
-  const filteredPosts = allPosts.filter(post => {
-    const matchesCategory = selectedCategory === '全部' || post.category === selectedCategory;
-    const matchesSearch = searchQuery === '' ||
+  const filteredPosts = allPosts.filter((post) => {
+    const matchesCategory =
+      selectedCategory === "全部" || post.category === selectedCategory;
+    const matchesSearch =
+      searchQuery === "" ||
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
@@ -81,7 +77,11 @@ export default function Home() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !loading && displayedPosts.length < filteredPosts.length) {
+        if (
+          entries[0].isIntersecting &&
+          !loading &&
+          displayedPosts.length < filteredPosts.length
+        ) {
           setLoading(true);
           // 模拟网络延迟
           setTimeout(() => {
@@ -104,7 +104,7 @@ export default function Home() {
   }, [loading, displayedPosts.length, filteredPosts.length, page]);
 
   const clearSearch = () => {
-    setSearchQuery('');
+    setSearchQuery("");
   };
 
   return (
@@ -200,9 +200,10 @@ export default function Home() {
                 onClick={() => setSelectedCategory(category)}
                 className={`
                   px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
-                  ${selectedCategory === category
-                    ? 'bg-foreground text-background'
-                    : 'bg-accent text-foreground hover:bg-accent/80'
+                  ${
+                    selectedCategory === category
+                      ? "bg-foreground text-background"
+                      : "bg-accent text-foreground hover:bg-accent/80"
                   }
                 `}
               >
@@ -266,7 +267,9 @@ export default function Home() {
                   <span className="text-sm">加载中...</span>
                 </div>
               ) : (
-                <p className="text-sm text-muted-foreground">向下滚动加载更多</p>
+                <p className="text-sm text-muted-foreground">
+                  向下滚动加载更多
+                </p>
               )}
             </div>
           )}

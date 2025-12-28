@@ -9,9 +9,14 @@ Start the development server (default port 3000):
 npm run dev
 ```
 
-Build for production:
+Build for production (static export):
 ```bash
 npm run build
+```
+
+Build and check deployment readiness:
+```bash
+npm run deploy
 ```
 
 Run production server:
@@ -23,6 +28,19 @@ Lint code:
 ```bash
 npm run lint
 ```
+
+## Deployment
+
+This project is configured to deploy to **GitHub Pages** using GitHub Actions.
+
+### Quick Deploy
+
+1. Push code to GitHub repository
+2. Enable GitHub Pages in repository settings (Source: GitHub Actions)
+3. GitHub Actions will automatically build and deploy on push to `main` branch
+4. Access your blog at `https://your-username.github.io/` or `https://your-username.github.io/repo-name/`
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 ## Project Architecture
 
@@ -51,7 +69,8 @@ app/
         └── page.tsx    # Dynamic blog post pages with SSG
 components/
 ├── Navigation.tsx      # Sticky navigation with dark mode toggle (client component)
-├── Footer.tsx          # Site footer
+├── Footer.tsx          # Site footer with social links
+├── Icons.tsx           # Custom icon components (Bilibili, Juejin)
 ├── ReadingProgressBar.tsx  # Reading progress indicator (client component)
 ├── BackToTop.tsx       # Scroll to top button (client component)
 ├── TableOfContents.tsx # Article table of contents (client component)
@@ -154,6 +173,13 @@ export default function ShareButton() {
 
 - `@/*` maps to project root (configured in `tsconfig.json`)
 
+### 6. Custom Icons
+
+- **Custom SVG icons** are centralized in `components/Icons.tsx`
+- Includes social media icons: `BilibiliIcon`, `JuejinIcon`
+- Icons accept `className` prop for consistent styling with Tailwind classes
+- Used throughout the app (Footer, About page) alongside lucide-react icons
+
 ## Component Details
 
 ### ReadingProgressBar
@@ -176,6 +202,14 @@ Floating button that appears after scrolling down 300px, uses transparent backgr
 
 Uses the native Web Share API (`navigator.share`) for sharing functionality.
 
+### Footer
+
+Site footer containing:
+- Copyright information with dynamic year
+- Social media links (Email, GitHub, Bilibili, Juejin)
+- Uses both lucide-react icons and custom SVG icons from Icons.tsx
+- Responsive layout with centered content
+
 ## Theme Implementation Details
 
 The blog has a custom paper-texture visual design:
@@ -193,6 +227,13 @@ The blog has a custom paper-texture visual design:
 - `jsx: "react-jsx"` for new JSX transform
 - Path alias: `@/*` -> `./*`
 
+## Code Style
+
+- **Double quotes** for strings and imports (consistent with Prettier/ESLint config)
+- **Trailing commas** in multi-line arrays/objects
+- **Semicolons** required
+- Use **TypeScript strict mode** for type safety
+
 ## Language and Content
 
 - **Primary language**: Chinese (zh-CN)
@@ -208,6 +249,23 @@ The blog has a custom paper-texture visual design:
 3. Use the same slug in both places
 4. The post will be automatically generated on next build
 
+### Adding or Updating Social Links
+
+The blog has social links in two places:
+
+1. **Footer** (`components/Footer.tsx`):
+   - Update the `socialLinks` array with name, href, and icon
+   - Icons can be from lucide-react or custom icons from `Icons.tsx`
+
+2. **About Page** (`app/about/page.tsx`):
+   - Update the social link `<a>` tags in the contact section
+   - Import necessary icons from lucide-react or `@/components/Icons`
+
+To add a new social media platform:
+1. Create a custom icon in `components/Icons.tsx` if not available in lucide-react
+2. Import the icon in both Footer and About page
+3. Add the link with proper href and aria-label
+
 ### Modifying Styles
 
 - Global styles: `app/globals.css`
@@ -219,3 +277,34 @@ The blog has a custom paper-texture visual design:
 - If dynamic route shows "文章未找到", check if params is properly awaited
 - If event handlers don't work, ensure component has `'use client'` directive
 - Check browser console for Hydration errors (mismatch between server and client)
+
+### Adding Custom Icons
+
+The project uses custom SVG icons for social media platforms. To add a new custom icon:
+
+1. Create the icon component in `components/Icons.tsx`:
+
+```typescript
+export const CustomIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 1024 1024"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path d="..." fill="currentColor" />
+  </svg>
+);
+```
+
+2. Import and use the icon in any component:
+
+```typescript
+import { CustomIcon } from "./Icons";
+
+// Usage
+<CustomIcon className="w-5 h-5" />
+```
+
+**Available custom icons:**
+- `BilibiliIcon` - Bilibili social media platform
+- `JuejinIcon` - Juejin (稀土掘金) technical community
