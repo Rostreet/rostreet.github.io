@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, User, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Navigation() {
@@ -38,12 +38,13 @@ export default function Navigation() {
   };
 
   const navItems = [
-    { href: "/", label: "首页", icon: Home },
-    { href: "/about", label: "关于", icon: User },
+    { href: "/", label: "首页" },
+    { href: "/photography", label: "摄影" },
+    { href: "/about", label: "关于" },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
@@ -54,14 +55,13 @@ export default function Navigation() {
 
           <div className="flex items-center space-x-1 sm:space-x-2">
             {navItems.map((item) => {
-              const Icon = item.icon;
               const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={`
-                    inline-flex items-center gap-1.5 px-3 py-2 rounded-lg
+                    inline-flex items-center px-4 py-2 rounded-lg
                     text-sm font-medium transition-all duration-200
                     ${
                       isActive
@@ -70,8 +70,7 @@ export default function Navigation() {
                     }
                   `}
                 >
-                  <Icon className="w-4 h-4" />
-                  <span className="hidden sm:inline">{item.label}</span>
+                  {item.label}
                 </Link>
               );
             })}

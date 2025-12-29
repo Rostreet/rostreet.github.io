@@ -41,6 +41,12 @@ const allPosts = [
   },
 ];
 
+// 计算每个分类的文章数量
+const categoryCounts = allPosts.reduce((acc, post) => {
+  acc[post.category] = (acc[post.category] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+
 const categories = [
   "全部",
   ...Array.from(new Set(allPosts.map((post) => post.category))),
@@ -53,6 +59,7 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const observerTarget = useRef<HTMLDivElement>(null);
 
   // 筛选文章
@@ -105,6 +112,30 @@ export default function Home() {
 
   const clearSearch = () => {
     setSearchQuery("");
+  };
+
+  // 生成结果统计文本
+  const getResultText = () => {
+    if (searchQuery && selectedCategory !== "全部") {
+      return `在 "${selectedCategory}" 中找到 ${filteredPosts.length} 篇关于 "${searchQuery}" 的文章`;
+    } else if (searchQuery) {
+      return `找到 ${filteredPosts.length} 篇关于 "${searchQuery}" 的文章`;
+    } else if (selectedCategory !== "全部") {
+      return `显示 ${filteredPosts.length} 篇 "${selectedCategory}" 文章`;
+    } else {
+      return ""; // 默认状态不显示统计
+    }
+  };
+
+  // 处理键盘导航
+  const handleCategoryKeyDown = (
+    e: React.KeyboardEvent<HTMLButtonElement>,
+    category: string
+  ) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setSelectedCategory(category);
+    }
   };
 
   return (
@@ -170,46 +201,99 @@ export default function Home() {
 
         {/* 右侧文章列表 */}
         <main className="lg:col-span-8 space-y-6">
-          {/* 搜索框 */}
-          <div className="border border-border/40 rounded-xl p-4 bg-card">
+          {/* 统一的搜索和筛选卡片 */}
+          <div className="border border-border/40 rounded-xl p-6 bg-card space-y-5">
+            {/* 搜索框 */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Search
+                className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground transition-all duration-200 ${
+                  isSearchFocused
+                    ? "scale-110 text-primary"
+                    : ""
+                }`}
+              />
               <input
                 type="text"
-                placeholder="搜索文章..."
+                placeholder="搜索文章标题或内容..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-10 py-2.5 rounded-lg border border-border/40 bg-accent focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setIsSearchFocused(false)}
+                className={`w-full pl-10 pr-10 py-3 rounded-lg border border-border/40 bg-accent text-sm transition-all duration-200 ${
+                  isSearchFocused
+                    ? "ring-2 ring-primary/50 border-primary/50 shadow-lg shadow-primary/10"
+                    : "focus:outline-none focus:ring-2 focus:ring-primary/50"
+                }`}
               />
               {searchQuery && (
                 <button
                   onClick={clearSearch}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground hover:bg-accent/80 rounded-full p-1 transition-all duration-200 hover:scale-110"
+                  aria-label="清除搜索"
                 >
                   <X className="w-5 h-5" />
                 </button>
               )}
             </div>
-          </div>
 
-          {/* 分类筛选 */}
-          <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`
-                  px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
-                  ${
-                    selectedCategory === category
-                      ? "bg-foreground text-background"
-                      : "bg-accent text-foreground hover:bg-accent/80"
-                  }
-                `}
-              >
-                {category}
-              </button>
-            ))}
+            {/* 结果统计 */}
+            <div className="text-sm text-muted-foreground">
+              {getResultText()}
+            </div>
+
+            {/* 分类筛选 */}
+            <div className="flex flex-wrap gap-2.5">
+              {categories.map((category) => {
+                const count =
+                  category === "全部"
+                    ? allPosts.length
+                    : categoryCounts[category] || 0;
+                const isSelected = selectedCategory === category;
+
+                return (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    onKeyDown={(e) =>
+                      handleCategoryKeyDown(e, category)
+                    }
+                    className={`
+                      group relative px-3 py-1.5 rounded-lg text-sm font-medium
+                      transition-all duration-200 ease-out
+                      ${
+                        isSelected
+                          ? "bg-foreground text-background shadow-md shadow-foreground/20 scale-105"
+                          : "bg-accent text-foreground hover:bg-accent/80 hover:scale-102"
+                      }
+                    `}
+                    aria-label={`筛选 ${category} 分类，有 ${count} 篇文章`}
+                    aria-pressed={isSelected}
+                  >
+                    <span className="relative z-10 flex items-center gap-1.5">
+                      {category}
+                      {/* 徽章显示文章数量 */}
+                      <span
+                        className={`
+                          px-1.5 py-0.5 rounded-full text-xs font-semibold
+                          transition-all duration-200
+                          ${
+                            isSelected
+                              ? "bg-background/20 text-background"
+                              : "bg-foreground/10 text-foreground"
+                          }
+                        `}
+                      >
+                        {count}
+                      </span>
+                    </span>
+                    {/* 选中状态的边框效果 */}
+                    {isSelected && (
+                      <span className="absolute inset-0 rounded-lg ring-2 ring-primary/50 ring-offset-2 ring-offset-card transition-all duration-200" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* 文章列表 */}

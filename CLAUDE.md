@@ -59,25 +59,25 @@ This is a personal blog built with **Next.js 16** using the **App Router** archi
 ```
 app/
 ├── layout.tsx          # Root layout with Navigation and Footer
-├── page.tsx            # Homepage with post listing and infinite scroll
+├── page.tsx            # Homepage with post listing, search, and filtering
 ├── globals.css         # Global styles with CSS variables for theming
 ├── about/
 │   └── page.tsx        # About page
+├── photography/
+│   └── page.tsx        # Photography portfolio page with masonry layout
 └── posts/
     ├── page.tsx        # Posts index page
     └── [slug]/
         └── page.tsx    # Dynamic blog post pages with SSG
 components/
 ├── Navigation.tsx      # Sticky navigation with dark mode toggle (client component)
-├── Footer.tsx          # Site footer with social links
+├── Footer.tsx          # Site footer (minimal design)
 ├── Icons.tsx           # Custom icon components (Bilibili, Juejin)
 ├── ReadingProgressBar.tsx  # Reading progress indicator (client component)
 ├── BackToTop.tsx       # Scroll to top button (client component)
 ├── TableOfContents.tsx # Article table of contents (client component)
 ├── ShareButton.tsx     # Native share functionality (client component)
 └── PostCardSkeleton.tsx # Loading skeleton for post cards
-lib/
-└── theme.ts            # Theme utilities (currently unused)
 ```
 
 ## Important: Next.js 16 Breaking Changes
@@ -145,7 +145,8 @@ export default function ShareButton() {
 - `components/TableOfContents.tsx` - IntersectionObserver for active heading
 - `components/ShareButton.tsx` - Navigator.share API
 - `components/PostCardSkeleton.tsx` - Loading state
-- `app/page.tsx` - Infinite scroll and filtering
+- `app/page.tsx` - Infinite scroll, search, and filtering
+- `app/photography/page.tsx` - Photo gallery with modal and state management
 
 ### 2. Theming System
 
@@ -160,13 +161,21 @@ export default function ShareButton() {
 - **Transparent backgrounds** for UI elements (TableOfContents, BackToTop, ShareButton)
 - CSS custom properties mapped to Tailwind colors
 - Paper texture effects using SVG filters in `app/globals.css`
-- Custom animations (`animate-fade-in`, `animate-slide-in`)
+- Custom animations:
+  - `animate-fade-in` - Fade in with slight upward movement
+  - `animate-slide-in` - Slide in from right
+  - `animate-waterfall` - Waterfall effect from top (used in photography page)
 
 ### 4. Data Management
 
 - Posts are currently hardcoded in `app/page.tsx` and `app/posts/[slug]/page.tsx`
+- Photography works are hardcoded in `app/photography/page.tsx`
 - Uses `generateStaticParams()` for static generation of blog post pages
-- Category filtering and search handled client-side in homepage
+- Category filtering and search handled client-side in homepage with:
+  - Real-time result statistics
+  - Category badges showing post count
+  - Keyboard navigation support (Tab key)
+  - Integrated search and filter UI
 - All blog post pages are pre-rendered at build time (SSG)
 
 ### 5. Path Aliases
@@ -204,11 +213,21 @@ Uses the native Web Share API (`navigator.share`) for sharing functionality.
 
 ### Footer
 
-Site footer containing:
+Minimal site footer containing:
 - Copyright information with dynamic year
-- Social media links (Email, GitHub, Bilibili, Juejin)
-- Uses both lucide-react icons and custom SVG icons from Icons.tsx
+- Clean, simple design (no social links)
 - Responsive layout with centered content
+
+### Photography Page
+
+Photo portfolio page (`app/photography/page.tsx`):
+- **Masonry Layout**: CSS columns with 5 columns per row
+- **Waterfall Animation**: Photos flow down from top with staggered delays
+- **Photo Modal**: Click to open detailed view with:
+  - Left side: Large photo display
+  - Right side: Photo metadata (location, date, camera, lens, description)
+- **Responsive Design**: Photos have varying heights (200-320px)
+- **Hover Effects**: Scale transform and gradient overlay
 
 ## Theme Implementation Details
 
@@ -249,22 +268,33 @@ The blog has a custom paper-texture visual design:
 3. Use the same slug in both places
 4. The post will be automatically generated on next build
 
+### Adding Photography Works
+
+1. Add photo data to `app/photography/page.tsx` in the `photos` array
+2. Each photo object should include:
+   - `id`: Unique identifier
+   - `src`: Image URL
+   - `title`: Photo title
+   - `location`: Shooting location
+   - `date`: Shooting date
+   - `description`: Photo description
+   - `camera`: Camera model
+   - `lens`: Lens (optional)
+   - `height`: Photo height in pixels (for masonry layout)
+3. Photos will automatically display in masonry layout with waterfall animation
+
 ### Adding or Updating Social Links
 
-The blog has social links in two places:
-
-1. **Footer** (`components/Footer.tsx`):
-   - Update the `socialLinks` array with name, href, and icon
-   - Icons can be from lucide-react or custom icons from `Icons.tsx`
-
-2. **About Page** (`app/about/page.tsx`):
-   - Update the social link `<a>` tags in the contact section
-   - Import necessary icons from lucide-react or `@/components/Icons`
+The blog has social links in the About page (`app/about/page.tsx`):
+- Update the social link `<a>` tags in the contact section
+- Import necessary icons from lucide-react or `@/components/Icons`
 
 To add a new social media platform:
 1. Create a custom icon in `components/Icons.tsx` if not available in lucide-react
-2. Import the icon in both Footer and About page
+2. Import the icon in the About page
 3. Add the link with proper href and aria-label
+
+Note: The Footer is minimal and does not contain social links.
 
 ### Modifying Styles
 
