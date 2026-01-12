@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "export": "next build",
+    "build": "bun run generate-rss && next build",
+    "generate-rss": "bun scripts/generate-rss.ts",
     "start": "next start",
     "lint": "eslint .",
     "deploy": "next build && echo 'Build complete. Ready for GitHub Pages deployment.'"
@@ -16,7 +16,8 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-markdown": "^10.1.0",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "rss": "^1.2.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

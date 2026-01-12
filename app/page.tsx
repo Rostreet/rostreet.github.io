@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Calendar, Clock, Search, X, Mail, Github } from "lucide-react";
+import { Calendar, Clock, Search, X, Mail, Github, ChevronDown } from "lucide-react";
 import PostCardSkeleton from "@/components/PostCardSkeleton";
 import { BilibiliIcon, JuejinIcon } from "@/components/Icons";
 
@@ -60,6 +60,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const observerTarget = useRef<HTMLDivElement>(null);
 
   // 筛选文章
@@ -114,38 +115,17 @@ export default function Home() {
     setSearchQuery("");
   };
 
-  // 生成结果统计文本
-  const getResultText = () => {
-    if (searchQuery && selectedCategory !== "全部") {
-      return `在 "${selectedCategory}" 中找到 ${filteredPosts.length} 篇关于 "${searchQuery}" 的文章`;
-    } else if (searchQuery) {
-      return `找到 ${filteredPosts.length} 篇关于 "${searchQuery}" 的文章`;
-    } else if (selectedCategory !== "全部") {
-      return `显示 ${filteredPosts.length} 篇 "${selectedCategory}" 文章`;
-    } else {
-      return ""; // 默认状态不显示统计
-    }
-  };
-
-  // 处理键盘导航
-  const handleCategoryKeyDown = (
-    e: React.KeyboardEvent<HTMLButtonElement>,
-    category: string
-  ) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      setSelectedCategory(category);
-    }
-  };
-
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* 左侧个人信息 */}
-        <aside className="lg:col-span-4 lg:sticky lg:top-24 lg:self-start animate-fade-in">
+        <aside className="lg:col-span-4 lg:sticky lg:top-0 lg:self-start animate-fade-in">
           <div className="space-y-6">
             {/* 头像卡片 */}
-            <div className="border border-border/40 rounded-xl p-6 bg-card text-center">
+            <div className={`
+              rounded-lg p-6 bg-card text-center transition-all duration-200
+              border-bleed-card
+            `}>
               <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
                 <span className="text-3xl font-bold">Z</span>
               </div>
@@ -202,98 +182,101 @@ export default function Home() {
         {/* 右侧文章列表 */}
         <main className="lg:col-span-8 space-y-6">
           {/* 统一的搜索和筛选卡片 */}
-          <div className="border border-border/40 rounded-xl p-6 bg-card space-y-5">
-            {/* 搜索框 */}
-            <div className="relative">
-              <Search
-                className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground transition-all duration-200 ${
-                  isSearchFocused
-                    ? "scale-110 text-primary"
-                    : ""
-                }`}
-              />
-              <input
-                type="text"
-                placeholder="搜索文章标题或内容..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onFocus={() => setIsSearchFocused(true)}
-                onBlur={() => setIsSearchFocused(false)}
-                className={`w-full pl-10 pr-10 py-3 rounded-lg border border-border/40 bg-accent text-sm transition-all duration-200 ${
-                  isSearchFocused
-                    ? "ring-2 ring-primary/50 border-primary/50 shadow-lg shadow-primary/10"
-                    : "focus:outline-none focus:ring-2 focus:ring-primary/50"
-                }`}
-              />
-              {searchQuery && (
-                <button
-                  onClick={clearSearch}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground hover:bg-accent/80 rounded-full p-1 transition-all duration-200 hover:scale-110"
-                  aria-label="清除搜索"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              )}
-            </div>
-
-            {/* 结果统计 */}
-            <div className="text-sm text-muted-foreground">
-              {getResultText()}
-            </div>
-
-            {/* 分类筛选 */}
-            <div className="flex flex-wrap gap-2.5">
-              {categories.map((category) => {
-                const count =
-                  category === "全部"
-                    ? allPosts.length
-                    : categoryCounts[category] || 0;
-                const isSelected = selectedCategory === category;
-
-                return (
+          <div className={`
+            rounded-lg p-6 bg-card space-y-5 transition-all duration-200
+            border-bleed-card
+          `}>
+            {/* 第一行：搜索框 + 下拉框（桌面端同行，移动端垂直） */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              {/* 搜索框 */}
+              <div className="relative flex-1">
+                <Search
+                  className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground transition-all duration-200 ${
+                    isSearchFocused
+                      ? "scale-110 text-primary"
+                      : ""
+                  }`}
+                />
+                <input
+                  type="text"
+                  placeholder="搜索文章标题或内容..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => setIsSearchFocused(true)}
+                  onBlur={() => setIsSearchFocused(false)}
+                  className={`w-full pl-10 pr-10 py-3 rounded-lg border border-border/40 bg-accent text-sm transition-all duration-200 ${
+                    isSearchFocused
+                      ? "ring-2 ring-primary/50 border-primary/50 shadow-lg shadow-primary/10"
+                      : "focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  }`}
+                />
+                {searchQuery && (
                   <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    onKeyDown={(e) =>
-                      handleCategoryKeyDown(e, category)
-                    }
-                    className={`
-                      group relative px-3 py-1.5 rounded-lg text-sm font-medium
-                      transition-all duration-200 ease-out
-                      ${
-                        isSelected
-                          ? "bg-foreground text-background shadow-md shadow-foreground/20 scale-105"
-                          : "bg-accent text-foreground hover:bg-accent/80 hover:scale-102"
-                      }
-                    `}
-                    aria-label={`筛选 ${category} 分类，有 ${count} 篇文章`}
-                    aria-pressed={isSelected}
+                    onClick={clearSearch}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground hover:bg-accent/80 rounded-full p-1 transition-all duration-200 hover:scale-110"
+                    aria-label="清除搜索"
                   >
-                    <span className="relative z-10 flex items-center gap-1.5">
-                      {category}
-                      {/* 徽章显示文章数量 */}
-                      <span
-                        className={`
-                          px-1.5 py-0.5 rounded-full text-xs font-semibold
-                          transition-all duration-200
-                          ${
-                            isSelected
-                              ? "bg-background/20 text-background"
-                              : "bg-foreground/10 text-foreground"
-                          }
-                        `}
-                      >
-                        {count}
-                      </span>
-                    </span>
-                    {/* 选中状态的边框效果 */}
-                    {isSelected && (
-                      <span className="absolute inset-0 rounded-lg ring-2 ring-primary/50 ring-offset-2 ring-offset-card transition-all duration-200" />
-                    )}
+                    <X className="w-5 h-5" />
                   </button>
-                );
-              })}
+                )}
+              </div>
+
+              {/* 分类展开/收缩按钮 */}
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className={`
+                  inline-flex items-center justify-center
+                  w-12 h-12 rounded-lg border border-border/40 bg-accent
+                  transition-all duration-200 shrink-0
+                  ${isDropdownOpen ? "ring-2 ring-primary/50 border-primary/50" : "hover:bg-accent/80"}
+                `}
+                aria-label="筛选分类"
+                aria-expanded={isDropdownOpen}
+              >
+                <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
             </div>
+
+            {/* 展开的标签区域 */}
+            {isDropdownOpen && (
+              <div className="flex flex-wrap gap-2.5 pt-2 animate-fade-in">
+                {categories.map((category) => {
+                  const count = category === "全部" ? allPosts.length : (categoryCounts[category] || 0);
+                  const isSelected = selectedCategory === category;
+
+                  return (
+                    <button
+                      key={category}
+                      onClick={() => {
+                        setSelectedCategory(category);
+                        setIsDropdownOpen(false);
+                      }}
+                      className={`
+                        group relative px-3 py-1.5 rounded-lg text-sm font-medium
+                        transition-all duration-200 ease-out
+                        ${
+                          isSelected
+                            ? "bg-foreground text-background shadow-md shadow-foreground/20 scale-105"
+                            : "bg-accent text-foreground hover:bg-accent/80 hover:scale-102"
+                        }
+                      `}
+                      aria-label={`筛选 ${category} 分类，有 ${count} 篇文章`}
+                      aria-pressed={isSelected}
+                    >
+                      <span className="relative z-10 flex items-center gap-1.5">
+                        {category}
+                        <span className="px-1.5 py-0.5 rounded-full text-xs font-semibold bg-foreground/10 text-foreground">
+                          {count}
+                        </span>
+                      </span>
+                      {isSelected && (
+                        <span className="absolute inset-0 rounded-lg ring-2 ring-primary/50 ring-offset-2 ring-offset-card transition-all duration-200" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* 文章列表 */}
@@ -313,7 +296,12 @@ export default function Home() {
                 <Link
                   key={post.id}
                   href={`/posts/${post.slug}`}
-                  className="block rounded-xl border border-border/40 bg-card hover:border-border/80 transition-all duration-200 animate-slide-in"
+                  className={`
+                    block rounded-lg bg-card transition-all duration-200 animate-slide-in
+                    border-bleed-card
+                    hover:shadow-lg hover:shadow-primary/10
+                    hover:translate-x-1
+                  `}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <div className="p-6">

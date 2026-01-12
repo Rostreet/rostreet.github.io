@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Rss } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Navigation() {
@@ -48,9 +48,7 @@ export default function Navigation() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold tracking-tight">
-              ZhaiChanghao
-            </span>
+            <span className="text-xl font-bold tracking-tight">z-ch</span>
           </Link>
 
           <div className="flex items-center space-x-1 sm:space-x-2">
@@ -74,6 +72,18 @@ export default function Navigation() {
                 </Link>
               );
             })}
+            {/* RSS 订阅按钮 */}
+            <Link
+              href="/rss.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center p-2 rounded-lg
+                text-muted-foreground hover:text-foreground hover:bg-accent/50
+                transition-all duration-200"
+              aria-label="RSS 订阅"
+            >
+              <Rss className="w-5 h-5" />
+            </Link>
             <button
               onClick={toggleTheme}
               className="inline-flex items-center justify-center p-2 rounded-lg

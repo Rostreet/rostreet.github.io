@@ -50,7 +50,7 @@ basePath: process.env.NEXT_PUBLIC_BASE_PATH || '/repo-name',
 在部署前，你可以本地测试构建：
 
 ```bash
-npm run build
+bun run build
 ```
 
 构建产物将生成在 `out/` 目录中。
@@ -59,9 +59,9 @@ npm run build
 
 GitHub Actions 工作流（`.github/workflows/deploy.yml`）会：
 
-1. 使用 Node.js 20 环境
-2. 安装依赖
-3. 运行 `npm run build` 生成静态文件
+1. 使用 Bun 运行时环境
+2. 使用 `bun install` 安装依赖
+3. 运行 `bun run build` 生成静态文件
 4. 将 `out/` 目录部署到 GitHub Pages
 
 ## 故障排除

@@ -6,27 +6,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Start the development server (default port 3000):
 ```bash
-npm run dev
+bun run dev
 ```
 
 Build for production (static export):
 ```bash
-npm run build
+bun run build
 ```
 
 Build and check deployment readiness:
 ```bash
-npm run deploy
+bun run deploy
 ```
 
 Run production server:
 ```bash
-npm start
+bun start
 ```
 
 Lint code:
 ```bash
-npm run lint
+bun run lint
+```
+
+Install dependencies:
+```bash
+bun install
 ```
 
 ## Deployment
@@ -44,10 +49,11 @@ For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 ## Project Architecture
 
-This is a personal blog built with **Next.js 16** using the **App Router** architecture and **React Server Components**.
+This is a personal blog built with **Next.js 16** using the **App Router** architecture and **React Server Components**, powered by **Bun** for fast development and builds.
 
 ### Tech Stack
 
+- **Bun** - Fast JavaScript runtime and package manager (replaces Node.js and npm)
 - **Next.js 16.1.1** - App Router with React Server Components
 - **React 19.2.3** - Latest React with improved Server Components
 - **TypeScript 5** - Strict mode enabled
@@ -70,7 +76,7 @@ app/
     └── [slug]/
         └── page.tsx    # Dynamic blog post pages with SSG
 components/
-├── Navigation.tsx      # Sticky navigation with dark mode toggle (client component)
+├── Navigation.tsx      # Sticky navigation with dark mode toggle and RSS icon (client component)
 ├── Footer.tsx          # Site footer (minimal design)
 ├── Icons.tsx           # Custom icon components (Bilibili, Juejin)
 ├── ReadingProgressBar.tsx  # Reading progress indicator (client component)
@@ -282,6 +288,20 @@ The blog has a custom paper-texture visual design:
    - `lens`: Lens (optional)
    - `height`: Photo height in pixels (for masonry layout)
 3. Photos will automatically display in masonry layout with waterfall animation
+
+### Generating RSS Feed
+
+The blog automatically generates RSS feed during build time. To manually regenerate:
+
+```bash
+bun run generate-rss
+```
+
+The RSS feed includes:
+- All blog posts with full content
+- Article metadata (title, date, category, author)
+- Generated at `public/rss.xml`
+- Accessible at `/rss.xml` on the deployed site
 
 ### Adding or Updating Social Links
 
