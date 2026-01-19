@@ -2,7 +2,16 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Calendar, Clock, Search, X, Mail, Github, ChevronDown } from "lucide-react";
+import Image from "next/image";
+import {
+  Calendar,
+  Clock,
+  Search,
+  X,
+  Mail,
+  Github,
+  ChevronDown,
+} from "lucide-react";
 import PostCardSkeleton from "@/components/PostCardSkeleton";
 import { BilibiliIcon, JuejinIcon } from "@/components/Icons";
 
@@ -122,15 +131,20 @@ export default function Home() {
         <aside className="lg:col-span-4 lg:sticky lg:top-0 lg:self-start animate-fade-in">
           <div className="space-y-6">
             {/* 头像卡片 */}
-            <div className={`
+            <div
+              className={`
               rounded-lg p-6 bg-card text-center transition-all duration-200
               border-bleed-card
-            `}>
-              <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
-                <span className="text-3xl font-bold">Z</span>
-              </div>
+            `}
+            >
+              <Image
+                src="/me.jpg"
+                alt="Zhai Changhao"
+                width={96}
+                height={96}
+                className="w-24 h-24 mx-auto mb-4 rounded-full object-cover"
+              />
               <h2 className="text-2xl font-bold mb-2">Zhai Changhao</h2>
-              <p className="text-muted-foreground text-sm mb-4">全栈开发者</p>
 
               {/* 联系方式 - 只显示图标 */}
               <div className="flex justify-center gap-3 mb-4">
@@ -172,7 +186,7 @@ export default function Home() {
 
               <div className="border-t border-border/40 pt-4">
                 <p className="text-sm italic text-muted-foreground">
-                  &quot;代码改变世界，创新驱动未来&quot;
+                  Welcome to my world!
                 </p>
               </div>
             </div>
@@ -182,19 +196,19 @@ export default function Home() {
         {/* 右侧文章列表 */}
         <main className="lg:col-span-8 space-y-6">
           {/* 统一的搜索和筛选卡片 */}
-          <div className={`
+          <div
+            className={`
             rounded-lg p-6 bg-card space-y-5 transition-all duration-200
             border-bleed-card
-          `}>
+          `}
+          >
             {/* 第一行：搜索框 + 下拉框（桌面端同行，移动端垂直） */}
             <div className="flex flex-col sm:flex-row gap-3">
               {/* 搜索框 */}
               <div className="relative flex-1">
                 <Search
                   className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground transition-all duration-200 ${
-                    isSearchFocused
-                      ? "scale-110 text-primary"
-                      : ""
+                    isSearchFocused ? "scale-110 text-primary" : ""
                   }`}
                 />
                 <input
@@ -228,12 +242,20 @@ export default function Home() {
                   inline-flex items-center justify-center
                   w-12 h-12 rounded-lg border border-border/40 bg-accent
                   transition-all duration-200 shrink-0
-                  ${isDropdownOpen ? "ring-2 ring-primary/50 border-primary/50" : "hover:bg-accent/80"}
+                  ${
+                    isDropdownOpen
+                      ? "ring-2 ring-primary/50 border-primary/50"
+                      : "hover:bg-accent/80"
+                  }
                 `}
                 aria-label="筛选分类"
                 aria-expanded={isDropdownOpen}
               >
-                <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-200 ${
+                    isDropdownOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
             </div>
 
@@ -241,7 +263,10 @@ export default function Home() {
             {isDropdownOpen && (
               <div className="flex flex-wrap gap-2.5 pt-2 animate-fade-in">
                 {categories.map((category) => {
-                  const count = category === "全部" ? allPosts.length : (categoryCounts[category] || 0);
+                  const count =
+                    category === "全部"
+                      ? allPosts.length
+                      : categoryCounts[category] || 0;
                   const isSelected = selectedCategory === category;
 
                   return (

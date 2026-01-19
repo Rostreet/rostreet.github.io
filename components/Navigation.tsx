@@ -39,7 +39,7 @@ export default function Navigation() {
 
   const navItems = [
     { href: "/", label: "首页" },
-    { href: "/photography", label: "摄影" },
+    { href: "/interests", label: "摄影" },
     { href: "/about", label: "关于" },
   ];
 

@@ -3,24 +3,15 @@ import Link from "next/link";
 import { BilibiliIcon, JuejinIcon } from "@/components/Icons";
 
 export default function AboutPage() {
-  const skills = [
-    "React / Next.js",
-    "TypeScript",
-    "Node.js",
-    "Python",
-    "PostgreSQL",
-    "Docker",
-    "AWS",
-    "Git",
-  ];
+  const skills = ["JavaScript", "Typecript", "Node.js", "Golang", "Git"];
 
   const interests = [
-    "Web 开发",
-    "系统设计",
-    "开源项目",
-    "技术写作",
-    "用户体验设计",
-    "性能优化",
+    "全栈开发",
+    "ai & agent",
+    "计算机底层原理",
+    "算法",
+    "音乐",
+    "跑步",
   ];
 
   return (
@@ -32,7 +23,7 @@ export default function AboutPage() {
             关于我
           </h1>
           <p className="text-xl text-muted-foreground">
-            热爱编程，享受创造，追求卓越
+            "是不会明白的,直到亲身经历之后"
           </p>
         </header>
 
@@ -44,16 +35,15 @@ export default function AboutPage() {
               <h2 className="text-2xl font-bold mb-4">简介</h2>
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  你好！我是一名全栈开发者，专注于构建高质量、用户友好的 Web
-                  应用。 我对新技术充满热情，喜欢探索和尝试各种编程语言和框架。
+                  你好！我是一名前端/全栈开发者，也是一名HZAU的大三学生
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  在日常工作中，我主要使用 React、Next.js 和 Node.js 进行开发，
-                  但我保持开放的心态，乐于学习任何能够解决问题的工具和技术。
+                  在日常工作 / 学习中，我主要使用 React、Next.js 和 Node.js
+                  进行开发， 目前在学习golang来作为后端的开发语言，
+                  我相信语言只是工具，主要目标是理解业务并解决问题
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  通过这个博客，我希望能够分享我的学习心得、项目经验和技术见解，
-                  同时也能够记录自己的成长历程。
+                  通过这个博客，我希望能够分享我的学习笔记、项目经历和人生感悟
                 </p>
               </div>
             </section>
@@ -99,11 +89,11 @@ export default function AboutPage() {
                   className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   <Mail className="w-5 h-5" />
-                  <span className="text-sm">hello@example.com</span>
+                  <span className="text-sm">feaaizch1001@gmail.com</span>
                 </a>
                 <div className="flex items-center gap-3 text-muted-foreground">
                   <MapPin className="w-5 h-5" />
-                  <span className="text-sm">中国</span>
+                  <span className="text-sm">中国 湖北 武汉</span>
                 </div>
               </div>
 
@@ -151,18 +141,6 @@ export default function AboutPage() {
                   </span>
                   <span className="text-sm font-medium">5+</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
-                    项目经验
-                  </span>
-                  <span className="text-sm font-medium">3年+</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
-                    开源贡献
-                  </span>
-                  <span className="text-sm font-medium">活跃</span>
-                </div>
               </div>
             </div>
           </div>
@@ -173,11 +151,11 @@ export default function AboutPage() {
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">让我们开始合作</h2>
             <p className="text-muted-foreground mb-6">
-              如果你对我的工作感兴趣，或者想要讨论一个项目，欢迎随时联系我
+              无论你是对我还是我的工作感兴趣，或者想要讨论一个项目，或者正在招人
             </p>
             <div className="flex justify-center gap-4">
               <a
-                href="mailto:hello@example.com"
+                href="mailto:feaaizch1001@gmail.com"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-foreground text-background hover:bg-foreground/90 transition-colors duration-200 font-medium"
               >
                 <Mail className="w-4 h-4" />
