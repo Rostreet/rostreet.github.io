@@ -51,10 +51,13 @@ const allPosts = [
 ];
 
 // 计算每个分类的文章数量
-const categoryCounts = allPosts.reduce((acc, post) => {
-  acc[post.category] = (acc[post.category] || 0) + 1;
-  return acc;
-}, {} as Record<string, number>);
+const categoryCounts = allPosts.reduce(
+  (acc, post) => {
+    acc[post.category] = (acc[post.category] || 0) + 1;
+    return acc;
+  },
+  {} as Record<string, number>,
+);
 
 const categories = [
   "全部",
@@ -110,7 +113,7 @@ export default function Home() {
           }, 500);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (observerTarget.current) {
@@ -149,14 +152,14 @@ export default function Home() {
               {/* 联系方式 - 只显示图标 */}
               <div className="flex justify-center gap-3 mb-4">
                 <a
-                  href="mailto:hello@example.com"
+                  href="mailto:feaaizch1001@gmail.com"
                   className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200 text-muted-foreground hover:text-foreground"
                   aria-label="Email"
                 >
                   <Mail className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/Rostreet"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200 text-muted-foreground hover:text-foreground"
@@ -165,7 +168,7 @@ export default function Home() {
                   <Github className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://bilibili.com"
+                  href="https://space.bilibili.com/285033804"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200 text-muted-foreground hover:text-foreground"
@@ -174,7 +177,7 @@ export default function Home() {
                   <BilibiliIcon className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://juejin.cn"
+                  href="https://juejin.cn/user/3600253306288539"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200 text-muted-foreground hover:text-foreground"

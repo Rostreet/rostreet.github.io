@@ -96,6 +96,70 @@ GitHub Actions 工作流（`.github/workflows/deploy.yml`）会：
 
 3. 在项目根目录创建 `CNAME` 文件（内容为你的域名）
 
+## 故障排除（进阶）
+
+### 样式文件（CSS）未加载
+
+**症状**：页面显示但没有样式，浏览器控制台显示 404 错误，CSS 文件路径错误。
+
+**原因**：仓库命名与部署类型不匹配。
+
+#### GitHub 用户页面 vs 项目页面
+
+**用户页面（User Pages）** - 推荐
+- 仓库名：`username.github.io`
+- 访问地址：`https://username.github.io/`
+- 无需配置 `basePath`
+- 适合个人博客/主页
+
+**项目页面（Project Pages）**
+- 仓库名：任意名称
+- 访问地址：`https://username.github.io/repo-name/`
+- 需要配置 `basePath: '/repo-name'`
+- 适合项目文档
+
+#### 解决方案
+
+如果使用用户页面（推荐）：
+1. 将仓库重命名为 `your-username.github.io`
+2. 确保 `next.config.ts` 中没有设置 `basePath`
+3. 推送代码后等待 GitHub Actions 自动部署
+
+如果使用项目页面：
+1. 编辑 `next.config.ts`，配置 `basePath`：
+   ```typescript
+   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '/repo-name',
+   ```
+2. 在 GitHub Actions 中设置环境变量 `NEXT_PUBLIC_BASE_PATH`
+
+### 页面空白或样式异常
+
+1. **强制刷新浏览器**
+   - Mac: `Cmd + Shift + R`
+   - Windows: `Ctrl + Shift + R`
+
+2. **清除浏览器缓存**
+   - 打开开发者工具（F12）
+   - 右键点击刷新按钮，选择"清空缓存并硬性重新加载"
+
+3. **检查网络请求**
+   - 打开开发者工具 > Network 标签
+   - 刷新页面，查看 CSS 文件是否成功加载（状态码 200）
+
+### 构建失败
+
+1. 查看 GitHub Actions 日志，定位错误信息
+2. 常见问题：
+   - 依赖安装失败：检查 `package.json` 和 `bun.lockb`
+   - TypeScript 错误：运行 `bun run lint` 本地检查
+   - 静态导出错误：确保没有使用仅限服务器的功能
+
+### 更新未生效
+
+1. GitHub Actions 部署需要 2-3 分钟
+2. 查看 Actions 页面确认部署状态
+3. 检查部署页面：`https://github.com/username/repo/deployments`
+
 ## 更多信息
 
 - [Next.js 静态导出文档](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)

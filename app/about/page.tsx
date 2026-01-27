@@ -22,9 +22,6 @@ export default function AboutPage() {
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
             关于我
           </h1>
-          <p className="text-xl text-muted-foreground">
-            "是不会明白的,直到亲身经历之后"
-          </p>
         </header>
 
         {/* Main Content */}
@@ -32,10 +29,9 @@ export default function AboutPage() {
           {/* Profile Section */}
           <div className="md:col-span-2 space-y-8">
             <section>
-              <h2 className="text-2xl font-bold mb-4">简介</h2>
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  你好！我是一名前端/全栈开发者，也是一名HZAU的大三学生
+                  你好！目前我是一名前端/全栈开发者，也是一名HZAU的大三学生
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   在日常工作 / 学习中，我主要使用 React、Next.js 和 Node.js
@@ -60,6 +56,40 @@ export default function AboutPage() {
                   </span>
                 ))}
               </div>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold mb-4">学习经历</h2>
+              <ol className="relative border-s border-border/40 ps-6 space-y-6">
+                <li className="relative">
+                  <span className="absolute -start-[9px] top-1.5 h-3 w-3 rounded-full bg-primary" />
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                    <h4 className="text-base font-semibold">
+                      华中农业大学 信息管理与信息系统
+                    </h4>
+                    <span className="text-xs text-muted-foreground">
+                      2023.09 - 2027.06
+                    </span>
+                  </div>
+                </li>
+              </ol>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold mb-4">工作经历</h2>
+              <ol className="relative border-s border-border/40 ps-6 space-y-6">
+                <li className="relative">
+                  <span className="absolute -start-[9px] top-1.5 h-3 w-3 rounded-full bg-primary" />
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                    <h4 className="text-base font-semibold">
+                      shopee 前端开发实习生
+                    </h4>
+                    <span className="text-xs text-muted-foreground">
+                      2025.08 - 2025.12
+                    </span>
+                  </div>
+                </li>
+              </ol>
             </section>
 
             <section>
@@ -96,39 +126,6 @@ export default function AboutPage() {
                   <span className="text-sm">中国 湖北 武汉</span>
                 </div>
               </div>
-
-              <div className="mt-6 pt-6 border-t border-border/40">
-                <h4 className="text-sm font-medium mb-3">社交媒体</h4>
-                <div className="flex gap-3">
-                  <a
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200"
-                    aria-label="GitHub"
-                  >
-                    <Github className="w-5 h-5" />
-                  </a>
-                  <a
-                    href="https://bilibili.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200"
-                    aria-label="Bilibili"
-                  >
-                    <BilibiliIcon className="w-5 h-5" />
-                  </a>
-                  <a
-                    href="https://juejin.cn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-accent hover:bg-accent/80 transition-colors duration-200"
-                    aria-label="稀土掘金"
-                  >
-                    <JuejinIcon className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
             </div>
 
             {/* Stats Card */}
@@ -149,9 +146,9 @@ export default function AboutPage() {
         {/* CTA Section */}
         <section className="mt-16 pt-8 border-t border-border/40">
           <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">让我们开始合作</h2>
+            <h2 className="text-2xl font-bold mb-4">联系我</h2>
             <p className="text-muted-foreground mb-6">
-              无论你是对我还是我的工作感兴趣，或者想要讨论一个项目，或者正在招人
+              无论你是对我还是我的工作感兴趣，还是想要讨论某个项目，或者正在招人
             </p>
             <div className="flex justify-center gap-4">
               <a

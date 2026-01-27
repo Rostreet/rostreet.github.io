@@ -24,7 +24,7 @@ const photos: Photo[] = Array.from({ length: 12 }, (_, i) => ({
   title: `摄影作品 ${i + 1}`,
   location: ["北京", "上海", "东京", "巴黎", "纽约", "伦敦"][i % 6],
   date: `2024-${String((i % 12) + 1).padStart(2, "0")}-${String(
-    ((i * 3) % 28) + 1
+    ((i * 3) % 28) + 1,
   ).padStart(2, "0")}`,
   description: "这是一张充满故事感的摄影作品，捕捉了生活中的美好瞬间。",
   camera: "Sony A7M4",
@@ -39,9 +39,7 @@ export default function PhotographyPage() {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
       {/* 页面说明 */}
       <div className="mb-6 text-center animate-fade-in">
-        <p className="text-sm text-muted-foreground">
-          记录生活中的美好瞬间
-        </p>
+        <p className="text-sm text-muted-foreground">光与影</p>
       </div>
 
       {/* 瀑布流布局 - 每行5张 */}
@@ -80,7 +78,10 @@ export default function PhotographyPage() {
 
       {/* 详情弹窗 */}
       {selectedPhoto && (
-        <PhotoModal photo={selectedPhoto} onClose={() => setSelectedPhoto(null)} />
+        <PhotoModal
+          photo={selectedPhoto}
+          onClose={() => setSelectedPhoto(null)}
+        />
       )}
     </div>
   );
