@@ -1,52 +1,11 @@
-import Link from 'next/link';
-import { Calendar, Clock } from 'lucide-react';
-
-const allPosts = [
-  {
-    slug: 'getting-started-with-nextjs',
-    title: '开始使用 Next.js 构建现代化应用',
-    excerpt: '探索 Next.js 15 的强大功能，包括服务端组件、App Router 以及最新的性能优化特性。',
-    date: '2024-12-28',
-    readTime: '5 分钟',
-    category: '前端开发',
-  },
-  {
-    slug: 'understanding-react-server-components',
-    title: '深入理解 React Server Components',
-    excerpt: 'React Server Components 彻底改变了我们构建 React 应用的方式。让我们深入了解其工作原理。',
-    date: '2024-12-27',
-    readTime: '8 分钟',
-    category: 'React',
-  },
-  {
-    slug: 'typescript-best-practices',
-    title: 'TypeScript 最佳实践指南',
-    excerpt: '提升你的 TypeScript 代码质量，学习类型系统的高级用法和常见模式的实现。',
-    date: '2024-12-26',
-    readTime: '6 分钟',
-    category: 'TypeScript',
-  },
-  {
-    slug: 'building-scalable-apis',
-    title: '构建可扩展的 API 架构',
-    excerpt: '学习如何设计能够随着业务增长而扩展的 API 系统，包括微服务架构和性能优化策略。',
-    date: '2024-12-25',
-    readTime: '10 分钟',
-    category: '后端开发',
-  },
-  {
-    slug: 'modern-css-techniques',
-    title: '现代 CSS 技术探索',
-    excerpt: '从 CSS Grid 到 Container Queries，探索现代 CSS 提供的强大布局能力和新特性。',
-    date: '2024-12-24',
-    readTime: '7 分钟',
-    category: 'CSS',
-  },
-];
-
-const categories = ['全部', '前端开发', 'React', 'TypeScript', '后端开发', 'CSS'];
+import Link from "next/link";
+import { Calendar, Clock } from "lucide-react";
+import { getAllPostsMeta, getAllCategories } from "@/lib/posts";
 
 export default function PostsPage() {
+  const allPosts = getAllPostsMeta();
+  const categories = ["全部", ...getAllCategories()];
+
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <div className="max-w-4xl mx-auto animate-fade-in">
@@ -68,9 +27,10 @@ export default function PostsPage() {
                 key={category}
                 className={`
                   px-4 py-2 rounded-lg text-sm font-medium transition-all
-                  ${category === '全部'
-                    ? 'bg-foreground text-background'
-                    : 'bg-accent text-foreground hover:bg-accent/80'
+                  ${
+                    category === "全部"
+                      ? "bg-foreground text-background"
+                      : "bg-accent text-foreground hover:bg-accent/80"
                   }
                 `}
               >

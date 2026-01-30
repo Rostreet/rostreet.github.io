@@ -11,6 +11,8 @@
     "deploy": "next build && echo 'Build complete. Ready for GitHub Pages deployment.'"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^0.562.0",
     "next": "16.1.1",
     "react": "19.2.3",

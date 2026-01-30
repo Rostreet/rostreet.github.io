@@ -15,7 +15,7 @@ export default function Navigation() {
     // 从 localStorage 读取保存的主题，如果没有则使用系统偏好
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
     const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)",
     ).matches;
     const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
 
@@ -48,7 +48,7 @@ export default function Navigation() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold tracking-tight">z-ch</span>
+            <span className="text-xl font-bold tracking-tight">zch</span>
           </Link>
 
           <div className="flex items-center space-x-1 sm:space-x-2">
