@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
-import { getAllPostsMeta, getAllCategories } from "@/lib/posts";
+import Link from "next/link";
+import { getAllCategories, getAllPostsMeta } from "@/lib/posts";
 
 export default function PostsPage() {
   const allPosts = getAllPostsMeta();
@@ -24,6 +24,7 @@ export default function PostsPage() {
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
               <button
+                type="button"
                 key={category}
                 className={`
                   px-4 py-2 rounded-lg text-sm font-medium transition-all
@@ -78,21 +79,34 @@ export default function PostsPage() {
         <div className="mt-12 flex justify-center">
           <div className="flex gap-2">
             <button
+              type="button"
               className="px-4 py-2 rounded-lg border border-border/40 hover:border-border/80 transition-all disabled:opacity-50"
               disabled
             >
               上一页
             </button>
-            <button className="px-4 py-2 rounded-lg bg-foreground text-background">
+            <button
+              type="button"
+              className="px-4 py-2 rounded-lg bg-foreground text-background"
+            >
               1
             </button>
-            <button className="px-4 py-2 rounded-lg border border-border/40 hover:border-border/80 transition-all">
+            <button
+              type="button"
+              className="px-4 py-2 rounded-lg border border-border/40 hover:border-border/80 transition-all"
+            >
               2
             </button>
-            <button className="px-4 py-2 rounded-lg border border-border/40 hover:border-border/80 transition-all">
+            <button
+              type="button"
+              className="px-4 py-2 rounded-lg border border-border/40 hover:border-border/80 transition-all"
+            >
               3
             </button>
-            <button className="px-4 py-2 rounded-lg border border-border/40 hover:border-border/80 transition-all">
+            <button
+              type="button"
+              className="px-4 py-2 rounded-lg border border-border/40 hover:border-border/80 transition-all"
+            >
               下一页
             </button>
           </div>

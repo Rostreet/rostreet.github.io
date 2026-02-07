@@ -1,5 +1,5 @@
-import { getAllPhotos } from "@/lib/photos";
 import PhotoGallery from "@/components/PhotoGallery";
+import { getAllPhotos } from "@/lib/photos";
 
 export default function InterestsPage() {
   const photos = getAllPhotos();

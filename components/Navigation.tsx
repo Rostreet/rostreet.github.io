@@ -1,8 +1,8 @@
 "use client";
 
+import { Moon, Rss, Sun } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Moon, Sun, Rss } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Navigation() {
@@ -15,7 +15,7 @@ export default function Navigation() {
     // 从 localStorage 读取保存的主题，如果没有则使用系统偏好
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
     const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
+      "(prefers-color-scheme: dark)"
     ).matches;
     const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
 
@@ -85,6 +85,7 @@ export default function Navigation() {
               <Rss className="w-5 h-5" />
             </Link>
             <button
+              type="button"
               onClick={toggleTheme}
               className="inline-flex items-center justify-center p-2 rounded-lg
                 text-muted-foreground hover:text-foreground hover:bg-accent/50

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Share2 } from 'lucide-react';
+import { Share2 } from "lucide-react";
 
 interface ShareButtonProps {
   title: string;
@@ -18,6 +18,7 @@ export default function ShareButton({ title }: ShareButtonProps) {
 
   return (
     <button
+      type="button"
       className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border/40 hover:border-border/80 transition-all"
       onClick={handleShare}
     >

@@ -1,19 +1,19 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import {
   Calendar,
+  ChevronDown,
   Clock,
+  Github,
+  Mail,
   Search,
   X,
-  Mail,
-  Github,
-  ChevronDown,
 } from "lucide-react";
-import PostCardSkeleton from "@/components/PostCardSkeleton";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BilibiliIcon, JuejinIcon } from "@/components/Icons";
+import PostCardSkeleton from "@/components/PostCardSkeleton";
 
 const POSTS_PER_PAGE = 10;
 
@@ -51,13 +51,10 @@ const allPosts = [
 ];
 
 // 计算每个分类的文章数量
-const categoryCounts = allPosts.reduce(
-  (acc, post) => {
-    acc[post.category] = (acc[post.category] || 0) + 1;
-    return acc;
-  },
-  {} as Record<string, number>,
-);
+const categoryCounts = allPosts.reduce((acc, post) => {
+  acc[post.category] = (acc[post.category] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
 
 const categories = [
   "全部",
@@ -76,22 +73,26 @@ export default function Home() {
   const observerTarget = useRef<HTMLDivElement>(null);
 
   // 筛选文章
-  const filteredPosts = allPosts.filter((post) => {
-    const matchesCategory =
-      selectedCategory === "全部" || post.category === selectedCategory;
-    const matchesSearch =
-      searchQuery === "" ||
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredPosts = useMemo(
+    () =>
+      allPosts.filter((post) => {
+        const matchesCategory =
+          selectedCategory === "全部" || post.category === selectedCategory;
+        const matchesSearch =
+          searchQuery === "" ||
+          post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+      }),
+    [selectedCategory, searchQuery]
+  );
 
   // 重置页码和显示的文章当筛选改变时
   useEffect(() => {
     setPage(1);
     setDisplayedPosts(filteredPosts.slice(0, POSTS_PER_PAGE));
     setInitialLoading(false);
-  }, [selectedCategory, searchQuery]);
+  }, [filteredPosts]);
 
   // 无限滚动
   useEffect(() => {
@@ -113,7 +114,7 @@ export default function Home() {
           }, 500);
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     );
 
     if (observerTarget.current) {
@@ -121,7 +122,13 @@ export default function Home() {
     }
 
     return () => observer.disconnect();
-  }, [loading, displayedPosts.length, filteredPosts.length, page]);
+  }, [
+    loading,
+    displayedPosts.length,
+    filteredPosts.length,
+    page,
+    filteredPosts,
+  ]);
 
   const clearSearch = () => {
     setSearchQuery("");
@@ -229,6 +236,7 @@ export default function Home() {
                 />
                 {searchQuery && (
                   <button
+                    type="button"
                     onClick={clearSearch}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground hover:bg-accent/80 rounded-full p-1 transition-all duration-200 hover:scale-110"
                     aria-label="清除搜索"
@@ -240,6 +248,7 @@ export default function Home() {
 
               {/* 分类展开/收缩按钮 */}
               <button
+                type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className={`
                   inline-flex items-center justify-center
@@ -274,6 +283,7 @@ export default function Home() {
 
                   return (
                     <button
+                      type="button"
                       key={category}
                       onClick={() => {
                         setSelectedCategory(category);

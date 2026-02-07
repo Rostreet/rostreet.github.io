@@ -1,27 +1,17 @@
-import { Mail, MapPin, Github } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import Link from "next/link";
-import { BilibiliIcon, JuejinIcon } from "@/components/Icons";
 
 export default function AboutPage() {
   const skills = ["JavaScript", "Typecript", "Node.js", "Golang", "Git"];
 
-  const interests = [
-    "全栈开发",
-    "ai & agent",
-    "计算机底层原理",
-    "算法",
-    "音乐",
-    "跑步",
-  ];
+  const interests = ["全栈开发", "ai & agent", "计算机底层原理", "算法", "音乐", "跑步"];
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <div className="max-w-4xl mx-auto animate-fade-in">
         {/* Header */}
         <header className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
-            关于我
-          </h1>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">关于我</h1>
         </header>
 
         {/* Main Content */}
@@ -34,8 +24,8 @@ export default function AboutPage() {
                   你好！目前我是一名前端/全栈开发者，也是一名HZAU的大三学生
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  在日常工作 / 学习中，我主要使用 React、Next.js 和 Node.js
-                  进行开发， 目前在学习golang来作为后端的开发语言，
+                  在日常工作 / 学习中，我主要使用 React、Next.js 和 Node.js 进行开发，
+                  目前在学习golang来作为后端的开发语言，
                   我相信语言只是工具，主要目标是理解业务并解决问题
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
@@ -64,12 +54,8 @@ export default function AboutPage() {
                 <li className="relative">
                   <span className="absolute -start-[9px] top-1.5 h-3 w-3 rounded-full bg-primary" />
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                    <h4 className="text-base font-semibold">
-                      华中农业大学 信息管理与信息系统
-                    </h4>
-                    <span className="text-xs text-muted-foreground">
-                      2023.09 - 2027.06
-                    </span>
+                    <h4 className="text-base font-semibold">华中农业大学 信息管理与信息系统</h4>
+                    <span className="text-xs text-muted-foreground">2023.09 - 2027.06</span>
                   </div>
                 </li>
               </ol>
@@ -81,12 +67,8 @@ export default function AboutPage() {
                 <li className="relative">
                   <span className="absolute -start-[9px] top-1.5 h-3 w-3 rounded-full bg-primary" />
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                    <h4 className="text-base font-semibold">
-                      shopee 前端开发实习生
-                    </h4>
-                    <span className="text-xs text-muted-foreground">
-                      2025.08 - 2025.12
-                    </span>
+                    <h4 className="text-base font-semibold">shopee 前端开发实习生</h4>
+                    <span className="text-xs text-muted-foreground">2025.08 - 2025.12</span>
                   </div>
                 </li>
               </ol>
@@ -96,10 +78,7 @@ export default function AboutPage() {
               <h2 className="text-2xl font-bold mb-4">兴趣爱好</h2>
               <ul className="grid grid-cols-2 gap-2">
                 {interests.map((interest) => (
-                  <li
-                    key={interest}
-                    className="flex items-center gap-2 text-muted-foreground"
-                  >
+                  <li key={interest} className="flex items-center gap-2 text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                     {interest}
                   </li>
@@ -133,9 +112,7 @@ export default function AboutPage() {
               <h3 className="text-lg font-bold mb-4">统计</h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
-                    文章数量
-                  </span>
+                  <span className="text-sm text-muted-foreground">文章数量</span>
                   <span className="text-sm font-medium">5+</span>
                 </div>
               </div>

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { X, MapPin, Calendar, Camera } from "lucide-react";
+import { Calendar, Camera, MapPin, X } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 import type { Photo } from "@/lib/photos";
 
 interface PhotoGalleryProps {
@@ -17,13 +17,20 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
       {/* 瀑布流布局 */}
       <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-3">
         {photos.map((photo, index) => (
-          <div
+          <button
+            type="button"
             key={photo.id}
-            className="relative group cursor-pointer overflow-hidden rounded-lg border border-border/40 bg-card animate-waterfall break-inside-avoid mb-3"
+            className="relative group cursor-pointer overflow-hidden rounded-lg border border-border/40 bg-card animate-waterfall break-inside-avoid mb-3 w-full"
             style={{
               animationDelay: `${index * 50}ms`,
             }}
             onClick={() => setSelectedPhoto(photo)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setSelectedPhoto(photo);
+              }
+            }}
           >
             <div
               className="relative w-full"
@@ -44,7 +51,7 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
                 </div>
               </div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
 
@@ -65,13 +72,29 @@ function PhotoModal({ photo, onClose }: { photo: Photo; onClose: () => void }) {
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in"
       onClick={onClose}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          onClose();
+        }
+      }}
+      role="dialog"
+      aria-modal="true"
+      tabIndex={-1}
     >
       <div
         className="relative max-w-6xl w-full max-h-[90vh] bg-card rounded-xl border border-border/40 overflow-hidden shadow-2xl animate-slide-in"
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") {
+            e.stopPropagation();
+            onClose();
+          }
+        }}
+        role="document"
       >
         {/* 关闭按钮 */}
         <button
+          type="button"
           onClick={onClose}
           className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 hover:bg-background text-foreground transition-all duration-200 hover:scale-110"
           aria-label="关闭"

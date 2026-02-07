@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { List } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface TableOfContentsProps {
   content: string;
@@ -20,8 +20,8 @@ function generateHeadingId(text: string): string {
     .toLowerCase()
     .trim()
     .replace(/\s+/g, "-")
-    .replace(/[^\w\u4e00-\u9fa5\-]+/g, "") // 保留中文字符
-    .replace(/\-\-+/g, "-")
+    .replace(/[^\w\u4e00-\u9fa5-]+/g, "") // 保留中文字符
+    .replace(/--+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
 
@@ -54,9 +54,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
       }
 
       if (level > 0 && text) {
-        const id =
-          generateHeadingId(text) ||
-          `heading-${Math.random().toString(36).substr(2, 9)}`;
+        const id = generateHeadingId(text) || `heading-${Math.random().toString(36).substr(2, 9)}`;
         extractedHeadings.push({ id, text, level });
       }
     });
@@ -72,7 +70,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
           }
         });
       },
-      { rootMargin: "-100px 0px -66% 0px" },
+      { rootMargin: "-100px 0px -66% 0px" }
     );
 
     // 延迟观察，确保 DOM 已渲染

@@ -1,12 +1,12 @@
-import { Calendar, Clock, ArrowLeft } from "lucide-react";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import ReadingProgressBar from "@/components/ReadingProgressBar";
 import BackToTop from "@/components/BackToTop";
-import TableOfContents from "@/components/TableOfContents";
+import ReadingProgressBar from "@/components/ReadingProgressBar";
 import ShareButton from "@/components/ShareButton";
-import { getPost, getAllPostSlugs } from "@/lib/posts";
+import TableOfContents from "@/components/TableOfContents";
+import { getAllPostSlugs, getPost } from "@/lib/posts";
 
 // 生成标题 ID 的工具函数
 function generateHeadingId(text: string): string {
@@ -15,8 +15,8 @@ function generateHeadingId(text: string): string {
     .toLowerCase()
     .trim()
     .replace(/\s+/g, "-")
-    .replace(/[^\w\u4e00-\u9fa5\-]+/g, "") // 保留中文字符
-    .replace(/\-\-+/g, "-")
+    .replace(/[^\w\u4e00-\u9fa5-]+/g, "") // 保留中文字符
+    .replace(/--+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
 
@@ -26,16 +26,13 @@ function Heading({ level, children, node, ...props }: any) {
   const getTextContent = (node: any): string => {
     if (typeof node === "string") return node;
     if (typeof node === "number") return node.toString();
-    if (Array.isArray(node))
-      return node.map(getTextContent).filter(Boolean).join("");
+    if (Array.isArray(node)) return node.map(getTextContent).filter(Boolean).join("");
     if (node?.props?.children) return getTextContent(node.props.children);
     return "";
   };
 
   const text = getTextContent(children) || "";
-  const id =
-    generateHeadingId(text) ||
-    `heading-${Math.random().toString(36).substr(2, 9)}`;
+  const id = generateHeadingId(text) || `heading-${Math.random().toString(36).substr(2, 9)}`;
 
   const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
@@ -52,11 +49,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getPost(slug);
 
