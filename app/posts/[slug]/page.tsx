@@ -1,4 +1,5 @@
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import React from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -23,7 +24,7 @@ function generateHeadingId(text: string): string {
 // 自定义标题组件，添加 ID 用于目录导航
 interface HeadingProps {
   level: number;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 function Heading({ level, children }: HeadingProps) {
@@ -33,7 +34,16 @@ function Heading({ level, children }: HeadingProps) {
     if (typeof node === "number") return node.toString();
     if (Array.isArray(node))
       return node.map(getTextContent).filter(Boolean).join("");
-    if (node?.props?.children) return getTextContent(node.props.children);
+    if (
+      React.isValidElement(node) &&
+      node.props &&
+      typeof node.props === "object" &&
+      "children" in node.props
+    ) {
+      return getTextContent(
+        (node.props as { children?: React.ReactNode }).children,
+      );
+    }
     return "";
   };
 
