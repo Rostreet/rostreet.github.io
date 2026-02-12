@@ -4,15 +4,15 @@ import RSS from "rss";
 
 // 文章数据 - 与 app/posts/[slug]/page.tsx 中的 posts 保持同步
 const posts = {
-  "getting-started-with-nextjs": {
-    slug: "getting-started-with-nextjs",
-    title: "开始使用 Next.js 构建现代化应用",
-    excerpt:
-      "探索 Next.js 15 的强大功能，包括服务端组件、App Router 以及最新的性能优化特性。了解如何使用这个强大的 React 框架构建高性能的 Web 应用。",
-    date: "2024-12-28",
-    readTime: "5 分钟",
-    category: "前端开发",
-    content: `
+	"getting-started-with-nextjs": {
+		slug: "getting-started-with-nextjs",
+		title: "开始使用 Next.js 构建现代化应用",
+		excerpt:
+			"探索 Next.js 15 的强大功能，包括服务端组件、App Router 以及最新的性能优化特性。了解如何使用这个强大的 React 框架构建高性能的 Web 应用。",
+		date: "2024-12-28",
+		readTime: "5 分钟",
+		category: "前端开发",
+		content: `
 # 简介
 
 Next.js 是一个强大的 React 框架，提供了许多开箱即用的功能，让开发者能够快速构建高性能的 Web 应用。它由 Vercel 团队开发维护，是目前最流行的 React 框架之一。
@@ -102,16 +102,16 @@ Next.js 是构建现代 Web 应用的绝佳选择，它提供了强大的功能�
 
 开始你的 Next.js 之旅吧！
     `,
-  },
-  "understanding-react-server-components": {
-    slug: "understanding-react-server-components",
-    title: "深入理解 React Server Components",
-    excerpt:
-      "React Server Components 彻底改变了我们构建 React 应用的方式。让我们深入了解其工作原理、使用场景以及最佳实践。",
-    date: "2024-12-27",
-    readTime: "8 分钟",
-    category: "React",
-    content: `
+	},
+	"understanding-react-server-components": {
+		slug: "understanding-react-server-components",
+		title: "深入理解 React Server Components",
+		excerpt:
+			"React Server Components 彻底改变了我们构建 React 应用的方式。让我们深入了解其工作原理、使用场景以及最佳实践。",
+		date: "2024-12-27",
+		readTime: "8 分钟",
+		category: "React",
+		content: `
 # React Server Components 深度解析
 
 React Server Components (RSC) 是 React 团队引入的一项重大变革，它彻底改变了我们构建 React 应用的方式。
@@ -230,16 +230,16 @@ React Server Components 是一个强大的工具，它让我们能够在服务�
 
 掌握 Server Components 将帮助你在现代 Web 开发中保持竞争优势。
     `,
-  },
-  "typescript-best-practices": {
-    slug: "typescript-best-practices",
-    title: "TypeScript 最佳实践指南",
-    excerpt:
-      "提升你的 TypeScript 代码质量，学习类型系统的高级用法、泛型、条件类型和常见模式的实现。",
-    date: "2024-12-26",
-    readTime: "6 分钟",
-    category: "TypeScript",
-    content: `
+	},
+	"typescript-best-practices": {
+		slug: "typescript-best-practices",
+		title: "TypeScript 最佳实践指南",
+		excerpt:
+			"提升你的 TypeScript 代码质量，学习类型系统的高级用法、泛型、条件类型和常见模式的实现。",
+		date: "2024-12-26",
+		readTime: "6 分钟",
+		category: "TypeScript",
+		content: `
 # TypeScript 最佳实践
 
 TypeScript 已经成为现代前端开发的标准，它能帮助我们捕获错误、提高代码质量和开发效率。
@@ -418,7 +418,7 @@ import { userService } from './services'; // 导入值
 
 TypeScript 是一个强大的工具，掌握它将让你的开发工作事半功倍。
     `,
-  },
+	},
 };
 
 // 站点配置
@@ -427,27 +427,27 @@ const sitePath = process.env.NEXT_PUBLIC_SITE_PATH || "/blog";
 
 // 创建 RSS feed
 const feed = new RSS({
-  title: "zch's Blog",
-  description: "关于前端开发、React、TypeScript 的技术博客",
-  feed_url: `${siteUrl}${sitePath}/rss.xml`,
-  site_url: siteUrl,
-  language: "zh-CN",
-  pubDate: new Date(),
-  ttl: 60,
-  generator: "Next.js 16 + RSS",
+	title: "zch's Blog",
+	description: "关于前端开发、React、TypeScript 的技术博客",
+	feed_url: `${siteUrl}${sitePath}/rss.xml`,
+	site_url: siteUrl,
+	language: "zh-CN",
+	pubDate: new Date(),
+	ttl: 60,
+	generator: "Next.js 16 + RSS",
 });
 
 // 添加所有文章到 feed
 for (const post of Object.values(posts)) {
-  feed.item({
-    title: post.title,
-    description: post.excerpt,
-    url: `${siteUrl}${sitePath}/posts/${post.slug}`,
-    date: new Date(post.date),
-    categories: [post.category],
-    author: "Zhai Changhao",
-    custom_elements: [{ "content:encoded": post.content.trim() }],
-  });
+	feed.item({
+		title: post.title,
+		description: post.excerpt,
+		url: `${siteUrl}${sitePath}/posts/${post.slug}`,
+		date: new Date(post.date),
+		categories: [post.category],
+		author: "Zhai Changhao",
+		custom_elements: [{ "content:encoded": post.content.trim() }],
+	});
 }
 
 // 生成 XML
@@ -456,7 +456,7 @@ const xml = feed.xml({ indent: true });
 // 确保 public 目录存在
 const publicDir = path.join(process.cwd(), "public");
 if (!fs.existsSync(publicDir)) {
-  fs.mkdirSync(publicDir, { recursive: true });
+	fs.mkdirSync(publicDir, { recursive: true });
 }
 
 // 写入文件

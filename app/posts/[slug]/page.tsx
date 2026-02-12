@@ -21,18 +21,26 @@ function generateHeadingId(text: string): string {
 }
 
 // 自定义标题组件，添加 ID 用于目录导航
-function Heading({ level, children, ...props }: any) {
+interface HeadingProps {
+  level: number;
+  children: React.ReactNode;
+}
+
+function Heading({ level, children }: HeadingProps) {
   // 提取文本内容
-  const getTextContent = (node: any): string => {
+  const getTextContent = (node: React.ReactNode): string => {
     if (typeof node === "string") return node;
     if (typeof node === "number") return node.toString();
-    if (Array.isArray(node)) return node.map(getTextContent).filter(Boolean).join("");
+    if (Array.isArray(node))
+      return node.map(getTextContent).filter(Boolean).join("");
     if (node?.props?.children) return getTextContent(node.props.children);
     return "";
   };
 
   const text = getTextContent(children) || "";
-  const id = generateHeadingId(text) || `heading-${Math.random().toString(36).substr(2, 9)}`;
+  const id =
+    generateHeadingId(text) ||
+    `heading-${Math.random().toString(36).substr(2, 9)}`;
 
   const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
@@ -49,7 +57,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = getPost(slug);
 

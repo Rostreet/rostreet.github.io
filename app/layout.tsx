@@ -5,31 +5,31 @@ import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+	variable: "--font-geist-sans",
+	subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+	variable: "--font-geist-mono",
+	subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "zch's Blog",
-  description: "A minimal and elegant personal blog",
+	title: "zch's Blog",
+	description: "A minimal and elegant personal blog",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="zh-CN" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+	return (
+		<html lang="zh-CN" suppressHydrationWarning>
+			<head>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
               (function() {
                 const theme = localStorage.getItem('theme') ||
                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -40,16 +40,16 @@ export default function RootLayout({
                 }
               })();
             `,
-          }}
-        />
-      </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="min-h-screen flex flex-col">
-          <Navigation />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
-      </body>
-    </html>
-  );
+					}}
+				/>
+			</head>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+				<div className="min-h-screen flex flex-col">
+					<Navigation />
+					<main className="flex-1">{children}</main>
+					<Footer />
+				</div>
+			</body>
+		</html>
+	);
 }

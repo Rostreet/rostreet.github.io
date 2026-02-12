@@ -2,85 +2,85 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-  --border: #e4e4e7;
-  --accent: #f4f4f5;
-  --card: #ffffff;
-  --card-foreground: #171717;
+	--background: #ffffff;
+	--foreground: #171717;
+	--muted: #f4f4f5;
+	--muted-foreground: #71717a;
+	--border: #e4e4e7;
+	--accent: #f4f4f5;
+	--card: #ffffff;
+	--card-foreground: #171717;
 }
 
 .dark {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-  --border: #27272a;
-  --accent: #27272a;
-  --card: #09090b;
-  --card-foreground: #fafafa;
+	--background: #09090b;
+	--foreground: #fafafa;
+	--muted: #27272a;
+	--muted-foreground: #a1a1aa;
+	--border: #27272a;
+	--accent: #27272a;
+	--card: #09090b;
+	--card-foreground: #fafafa;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
-  --color-accent: var(--accent);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-border: var(--border);
+	--color-accent: var(--accent);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  position: relative;
+	background: var(--background);
+	color: var(--foreground);
+	font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+	position: relative;
 }
 
 /* 纸质纹理背景 */
 body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.4;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 0;
+	opacity: 0.4;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 /* 纸张质感渐变 */
 body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse at top, rgba(0, 0, 0, 0.02) 0%, transparent 50%),
-    radial-gradient(ellipse at bottom, rgba(0, 0, 0, 0.02) 0%, transparent 50%);
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 0;
+	background:
+		radial-gradient(ellipse at top, rgba(0, 0, 0, 0.02) 0%, transparent 50%),
+		radial-gradient(ellipse at bottom, rgba(0, 0, 0, 0.02) 0%, transparent 50%);
 }
 
 /* 深色模式的纸质纹理 */
 .dark body::before {
-  opacity: 0.15;
+	opacity: 0.15;
 }
 
 .dark body::after {
-  background:
-    radial-gradient(ellipse at top, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
-    radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+	background:
+		radial-gradient(ellipse at top, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+		radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
 }
 
 /* 确保内容在纹理之上 */
@@ -88,142 +88,142 @@ main,
 aside,
 nav,
 footer {
-  position: relative;
-  z-index: 1;
+	position: relative;
+	z-index: 1;
 }
 
 /* 卡片的纸质感效果 */
 .bg-card {
-  backdrop-filter: blur(10px);
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.05),
-    0 1px 2px rgba(0, 0, 0, 0.03),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  position: relative;
+	backdrop-filter: blur(10px);
+	box-shadow:
+		0 1px 3px rgba(0, 0, 0, 0.05),
+		0 1px 2px rgba(0, 0, 0, 0.03),
+		inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	position: relative;
 }
 
 .bg-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0.3;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)' opacity='0.03'/%3E%3C/svg%3E");
-  z-index: -1;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: inherit;
+	pointer-events: none;
+	opacity: 0.3;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)' opacity='0.03'/%3E%3C/svg%3E");
+	z-index: -1;
 }
 
 .dark .bg-card {
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.2),
-    0 1px 2px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+	box-shadow:
+		0 1px 3px rgba(0, 0, 0, 0.2),
+		0 1px 2px rgba(0, 0, 0, 0.15),
+		inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
 /* 导航栏的额外纸质感 */
 nav {
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.05),
-    0 1px 2px rgba(0, 0, 0, 0.03);
+	box-shadow:
+		0 1px 3px rgba(0, 0, 0, 0.05),
+		0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .dark nav {
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.2),
-    0 1px 2px rgba(0, 0, 0, 0.15);
+	box-shadow:
+		0 1px 3px rgba(0, 0, 0, 0.2),
+		0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+	width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+	background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--muted-foreground);
-  border-radius: 4px;
+	background: var(--muted-foreground);
+	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--foreground);
+	background: var(--foreground);
 }
 
 /* Animation utilities */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
 }
 
 @keyframes waterfall {
-  from {
-    opacity: 0;
-    transform: translateY(-100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(-100px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
+	animation: fadeIn 0.5s ease-out;
 }
 
 .animate-slide-in {
-  animation: slideInFromRight 0.4s ease-out;
+	animation: slideInFromRight 0.4s ease-out;
 }
 
 .animate-waterfall {
-  animation: waterfall 0.8s ease-out;
+	animation: waterfall 0.8s ease-out;
 }
 
 /* 浸染边框卡片样式 */
 .border-bleed-card {
-  position: relative;
+	position: relative;
 }
 
 .border-bleed-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    hsl(var(--primary) / 0.4) 10%,
-    hsl(var(--primary) / 1) 50%,
-    hsl(var(--primary) / 0.4) 90%,
-    transparent 100%
-  );
-  border-radius: 4px 0 0 4px;
-  box-shadow: 0 0 12px hsl(var(--primary) / 0.2);
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 4px;
+	background: linear-gradient(
+		to bottom,
+		transparent 0%,
+		hsl(var(--primary) / 0.4) 10%,
+		hsl(var(--primary) / 1) 50%,
+		hsl(var(--primary) / 0.4) 90%,
+		transparent 100%
+	);
+	border-radius: 4px 0 0 4px;
+	box-shadow: 0 0 12px hsl(var(--primary) / 0.2);
 }
