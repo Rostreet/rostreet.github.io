@@ -11,12 +11,8 @@ export default function PostsPage() {
       <div className="max-w-4xl mx-auto animate-fade-in">
         {/* Header */}
         <header className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-            文章
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            分享技术见解和学习心得
-          </p>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">文章</h1>
+          <p className="text-xl text-muted-foreground">分享技术见解和学习心得</p>
         </header>
 
         {/* Categories Filter */}
@@ -67,9 +63,7 @@ export default function PostsPage() {
                 <h2 className="text-xl sm:text-2xl font-semibold mb-2 group-hover:text-primary transition-colors duration-200">
                   {post.title}
                 </h2>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {post.excerpt}
-                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{post.excerpt}</p>
               </div>
             </Link>
           ))}
@@ -85,10 +79,7 @@ export default function PostsPage() {
             >
               上一页
             </button>
-            <button
-              type="button"
-              className="px-4 py-2 rounded-lg bg-foreground text-background"
-            >
+            <button type="button" className="px-4 py-2 rounded-lg bg-foreground text-background">
               1
             </button>
             <button

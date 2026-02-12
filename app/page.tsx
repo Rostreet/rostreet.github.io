@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Calendar,
-  ChevronDown,
-  Clock,
-  Github,
-  Mail,
-  Search,
-  X,
-} from "lucide-react";
+import { Calendar, ChevronDown, Clock, Github, Mail, Search, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -51,15 +43,15 @@ const allPosts = [
 ];
 
 // 计算每个分类的文章数量
-const categoryCounts = allPosts.reduce((acc, post) => {
-  acc[post.category] = (acc[post.category] || 0) + 1;
-  return acc;
-}, {} as Record<string, number>);
+const categoryCounts = allPosts.reduce(
+  (acc, post) => {
+    acc[post.category] = (acc[post.category] || 0) + 1;
+    return acc;
+  },
+  {} as Record<string, number>
+);
 
-const categories = [
-  "全部",
-  ...Array.from(new Set(allPosts.map((post) => post.category))),
-];
+const categories = ["全部", ...Array.from(new Set(allPosts.map((post) => post.category)))];
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("全部");
@@ -76,8 +68,7 @@ export default function Home() {
   const filteredPosts = useMemo(
     () =>
       allPosts.filter((post) => {
-        const matchesCategory =
-          selectedCategory === "全部" || post.category === selectedCategory;
+        const matchesCategory = selectedCategory === "全部" || post.category === selectedCategory;
         const matchesSearch =
           searchQuery === "" ||
           post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -98,11 +89,7 @@ export default function Home() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (
-          entries[0].isIntersecting &&
-          !loading &&
-          displayedPosts.length < filteredPosts.length
-        ) {
+        if (entries[0].isIntersecting && !loading && displayedPosts.length < filteredPosts.length) {
           setLoading(true);
           // 模拟网络延迟
           setTimeout(() => {
@@ -122,13 +109,7 @@ export default function Home() {
     }
 
     return () => observer.disconnect();
-  }, [
-    loading,
-    displayedPosts.length,
-    filteredPosts.length,
-    page,
-    filteredPosts,
-  ]);
+  }, [loading, displayedPosts.length, filteredPosts.length, page, filteredPosts]);
 
   const clearSearch = () => {
     setSearchQuery("");
@@ -195,9 +176,7 @@ export default function Home() {
               </div>
 
               <div className="border-t border-border/40 pt-4">
-                <p className="text-sm italic text-muted-foreground">
-                  Welcome to my world!
-                </p>
+                <p className="text-sm italic text-muted-foreground">Welcome to my world!</p>
               </div>
             </div>
           </div>
@@ -276,9 +255,7 @@ export default function Home() {
               <div className="flex flex-wrap gap-2.5 pt-2 animate-fade-in">
                 {categories.map((category) => {
                   const count =
-                    category === "全部"
-                      ? allPosts.length
-                      : categoryCounts[category] || 0;
+                    category === "全部" ? allPosts.length : categoryCounts[category] || 0;
                   const isSelected = selectedCategory === category;
 
                   return (
@@ -326,9 +303,7 @@ export default function Home() {
                 <PostCardSkeleton />
               </>
             ) : displayedPosts.length === 0 ? (
-              <div className="text-center py-12 text-muted-foreground">
-                没有找到匹配的文章
-              </div>
+              <div className="text-center py-12 text-muted-foreground">没有找到匹配的文章</div>
             ) : (
               displayedPosts.map((post, index) => (
                 <Link
@@ -377,9 +352,7 @@ export default function Home() {
                   <span className="text-sm">加载中...</span>
                 </div>
               ) : (
-                <p className="text-sm text-muted-foreground">
-                  向下滚动加载更多
-                </p>
+                <p className="text-sm text-muted-foreground">向下滚动加载更多</p>
               )}
             </div>
           )}

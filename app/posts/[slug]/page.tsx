@@ -21,7 +21,7 @@ function generateHeadingId(text: string): string {
 }
 
 // 自定义标题组件，添加 ID 用于目录导航
-function Heading({ level, children, node, ...props }: any) {
+function Heading({ level, children, ...props }: any) {
   // 提取文本内容
   const getTextContent = (node: any): string => {
     if (typeof node === "string") return node;

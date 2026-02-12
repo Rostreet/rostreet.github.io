@@ -32,10 +32,7 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
               }
             }}
           >
-            <div
-              className="relative w-full"
-              style={{ height: `${photo.height}px` }}
-            >
+            <div className="relative w-full" style={{ height: `${photo.height}px` }}>
               <Image
                 src={photo.src}
                 alt={photo.title}
@@ -56,12 +53,7 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
       </div>
 
       {/* 详情弹窗 */}
-      {selectedPhoto && (
-        <PhotoModal
-          photo={selectedPhoto}
-          onClose={() => setSelectedPhoto(null)}
-        />
-      )}
+      {selectedPhoto && <PhotoModal photo={selectedPhoto} onClose={() => setSelectedPhoto(null)} />}
     </>
   );
 }
@@ -145,9 +137,7 @@ function PhotoModal({ photo, onClose }: { photo: Photo; onClose: () => void }) {
                   <p className="text-sm text-muted-foreground mb-1">拍摄器材</p>
                   <p className="font-medium">{photo.camera}</p>
                   {photo.lens && (
-                    <p className="text-sm text-muted-foreground mt-1">
-                      镜头：{photo.lens}
-                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">镜头：{photo.lens}</p>
                   )}
                 </div>
               </div>
