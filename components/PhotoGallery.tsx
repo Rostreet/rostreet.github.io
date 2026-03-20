@@ -44,7 +44,7 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
                 sizes="20vw"
               />
               {/* 悬停遮罩 */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
                   <h3 className="text-sm font-semibold mb-1">{photo.title}</h3>
                   <p className="text-xs opacity-90">{photo.location}</p>
@@ -122,7 +122,7 @@ function PhotoModal({ photo, onClose }: { photo: Photo; onClose: () => void }) {
             <div className="space-y-4">
               {/* 拍摄地点 */}
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                <MapPin className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">拍摄地点</p>
                   <p className="font-medium">{photo.location}</p>
@@ -131,7 +131,7 @@ function PhotoModal({ photo, onClose }: { photo: Photo; onClose: () => void }) {
 
               {/* 拍摄时间 */}
               <div className="flex items-start gap-3">
-                <Calendar className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                <Calendar className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">拍摄时间</p>
                   <p className="font-medium">{photo.date}</p>
@@ -140,7 +140,7 @@ function PhotoModal({ photo, onClose }: { photo: Photo; onClose: () => void }) {
 
               {/* 相机信息 */}
               <div className="flex items-start gap-3">
-                <Camera className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                <Camera className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">拍摄器材</p>
                   <p className="font-medium">{photo.camera}</p>
