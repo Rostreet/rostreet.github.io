@@ -2,113 +2,96 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #fbf7f0;
-  --foreground: #1d1a17;
-  --muted: #f3ecdf;
-  --muted-foreground: #71685d;
-  --border: #ddd3c4;
-  --accent: #efe6d8;
-  --card: #fffaf2;
-  --card-foreground: #1d1a17;
-  --ink-accent: 179, 122, 52;
+	--background: #fbf7f0;
+	--foreground: #1d1a17;
+	--muted: #f3ecdf;
+	--muted-foreground: #71685d;
+	--border: #ddd3c4;
+	--accent: #efe6d8;
+	--card: #fffaf2;
+	--card-foreground: #1d1a17;
+	--ink-accent: 179, 122, 52;
 }
 
 .dark {
-  --background: #12100d;
-  --foreground: #f4eee5;
-  --muted: #201b17;
-  --muted-foreground: #b6ab9d;
-  --border: #312921;
-  --accent: #1b1713;
-  --card: #181410;
-  --card-foreground: #f4eee5;
-  --ink-accent: 214, 167, 106;
+	--background: #12100d;
+	--foreground: #f4eee5;
+	--muted: #201b17;
+	--muted-foreground: #b6ab9d;
+	--border: #312921;
+	--accent: #1b1713;
+	--card: #181410;
+	--card-foreground: #f4eee5;
+	--ink-accent: 214, 167, 106;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
-  --color-accent: var(--accent);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-border: var(--border);
+	--color-accent: var(--accent);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
 }
 
 body {
-  background:
-    radial-gradient(
-      circle at left top,
-      rgb(179 122 52 / 0.09),
-      transparent 28%
-    ),
-    radial-gradient(circle at right top, rgb(29 26 23 / 0.04), transparent 24%),
-    var(--background);
-  color: var(--foreground);
-  font-family:
-    var(--font-sans),
-    system-ui,
-    -apple-system,
-    sans-serif;
-  position: relative;
-  min-height: 100vh;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
+	background:
+		radial-gradient(circle at left top, rgb(179 122 52 / 0.09), transparent 28%),
+		radial-gradient(circle at right top, rgb(29 26 23 / 0.04), transparent 24%), var(--background);
+	color: var(--foreground);
+	font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+	position: relative;
+	min-height: 100vh;
+	line-height: 1.6;
+	letter-spacing: -0.01em;
 }
 
 /* 纸质纹理背景 */
 body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.16;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 0;
+	opacity: 0.16;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+	mix-blend-mode: multiply;
 }
 
 /* 纸张质感渐变 */
 body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    linear-gradient(to bottom, rgb(255 255 255 / 0.38), transparent 18%),
-    radial-gradient(ellipse at top, rgb(0 0 0 / 0.03) 0%, transparent 56%),
-    radial-gradient(ellipse at bottom, rgb(0 0 0 / 0.025) 0%, transparent 52%);
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 0;
+	background:
+		linear-gradient(to bottom, rgb(255 255 255 / 0.38), transparent 18%),
+		radial-gradient(ellipse at top, rgb(0 0 0 / 0.03) 0%, transparent 56%),
+		radial-gradient(ellipse at bottom, rgb(0 0 0 / 0.025) 0%, transparent 52%);
 }
 
 /* 深色模式的纸质纹理 */
 .dark body::before {
-  opacity: 0.08;
-  mix-blend-mode: screen;
+	opacity: 0.08;
+	mix-blend-mode: screen;
 }
 
 .dark body::after {
-  background:
-    linear-gradient(to bottom, rgb(255 255 255 / 0.03), transparent 18%),
-    radial-gradient(
-      ellipse at top,
-      rgb(255 255 255 / 0.03) 0%,
-      transparent 54%
-    ),
-    radial-gradient(
-      ellipse at bottom,
-      rgb(255 255 255 / 0.025) 0%,
-      transparent 52%
-    );
+	background:
+		linear-gradient(to bottom, rgb(255 255 255 / 0.03), transparent 18%),
+		radial-gradient(ellipse at top, rgb(255 255 255 / 0.03) 0%, transparent 54%),
+		radial-gradient(ellipse at bottom, rgb(255 255 255 / 0.025) 0%, transparent 52%);
 }
 
 /* 确保内容在纹理之上 */
@@ -116,258 +99,250 @@ main,
 aside,
 nav,
 footer {
-  position: relative;
-  z-index: 1;
+	position: relative;
+	z-index: 1;
 }
 
 a {
-  transition:
-    color 180ms ease,
-    opacity 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease,
-    transform 180ms ease;
+	transition:
+		color 180ms ease,
+		opacity 180ms ease,
+		border-color 180ms ease,
+		background-color 180ms ease,
+		transform 180ms ease;
 }
 
 ::selection {
-  background: rgb(var(--ink-accent) / 0.22);
+	background: rgb(var(--ink-accent) / 0.22);
 }
 
 .bg-card {
-  position: relative;
-  background: linear-gradient(
-    180deg,
-    rgb(255 255 255 / 0.18),
-    rgb(255 255 255 / 0) 74%
-  );
-  backdrop-filter: blur(6px);
+	position: relative;
+	background: linear-gradient(180deg, rgb(255 255 255 / 0.18), rgb(255 255 255 / 0) 74%);
+	backdrop-filter: blur(6px);
 }
 
 .bg-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0.14;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)' opacity='0.03'/%3E%3C/svg%3E");
-  z-index: -1;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: inherit;
+	pointer-events: none;
+	opacity: 0.14;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperNoise)' opacity='0.03'/%3E%3C/svg%3E");
+	z-index: -1;
 }
 
 .dark .bg-card {
-  background: linear-gradient(
-    180deg,
-    rgb(255 255 255 / 0.03),
-    rgb(255 255 255 / 0) 74%
-  );
+	background: linear-gradient(180deg, rgb(255 255 255 / 0.03), rgb(255 255 255 / 0) 74%);
 }
 
 nav {
-  box-shadow: none;
+	box-shadow: none;
 }
 
 html {
-  scroll-behavior: smooth;
+	scroll-behavior: smooth;
 }
 
 .section-divider {
-  position: relative;
-  border-top: 1px solid rgb(29 26 23 / 0.08);
+	position: relative;
+	border-top: 1px solid rgb(29 26 23 / 0.08);
 }
 
 .section-divider::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: 4.5rem;
-  height: 1px;
-  background: linear-gradient(90deg, rgb(var(--ink-accent) / 0.9), transparent);
+	content: "";
+	position: absolute;
+	top: -1px;
+	left: 0;
+	width: 4.5rem;
+	height: 1px;
+	background: linear-gradient(90deg, rgb(var(--ink-accent) / 0.9), transparent);
 }
 
 .dark .section-divider {
-  border-top-color: rgb(255 255 255 / 0.08);
+	border-top-color: rgb(255 255 255 / 0.08);
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+	width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+	background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--muted-foreground);
-  border-radius: 4px;
+	background: var(--muted-foreground);
+	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--foreground);
+	background: var(--foreground);
 }
 
 /* Animation utilities */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
 }
 
 @keyframes waterfall {
-  from {
-    opacity: 0;
-    transform: translateY(-100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(-100px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
+	animation: fadeIn 0.5s ease-out;
 }
 
 .animate-slide-in {
-  animation: slideInFromRight 0.4s ease-out;
+	animation: slideInFromRight 0.4s ease-out;
 }
 
 .animate-waterfall {
-  animation: waterfall 0.8s ease-out;
+	animation: waterfall 0.8s ease-out;
 }
 
 @keyframes wordmarkFloat {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-1.5px) scale(1.015);
-  }
+	0%,
+	100% {
+		transform: translateY(0) scale(1);
+	}
+	50% {
+		transform: translateY(-1.5px) scale(1.015);
+	}
 }
 
 @keyframes wordmarkGlow {
-  0%,
-  100% {
-    opacity: 0.22;
-    transform: scale(0.96);
-  }
-  50% {
-    opacity: 0.42;
-    transform: scale(1.03);
-  }
+	0%,
+	100% {
+		opacity: 0.22;
+		transform: scale(0.96);
+	}
+	50% {
+		opacity: 0.42;
+		transform: scale(1.03);
+	}
 }
 
 @keyframes wordmarkTrail {
-  from {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: -144;
-  }
+	from {
+		stroke-dashoffset: 0;
+	}
+	to {
+		stroke-dashoffset: -144;
+	}
 }
 
 @keyframes wordmarkInk {
-  0%,
-  100% {
-    transform: rotate(-2deg) translateY(0) skewX(-2deg);
-  }
-  50% {
-    transform: rotate(1.2deg) translateY(-1px) skewX(1deg);
-  }
+	0%,
+	100% {
+		transform: rotate(-2deg) translateY(0) skewX(-2deg);
+	}
+	50% {
+		transform: rotate(1.2deg) translateY(-1px) skewX(1deg);
+	}
 }
 
 @keyframes wordmarkFlick {
-  0%,
-  100% {
-    opacity: 0.45;
-    transform: translateX(0) translateY(0) rotate(-6deg);
-  }
-  50% {
-    opacity: 0.82;
-    transform: translateX(1.5px) translateY(-0.5px) rotate(2deg);
-  }
+	0%,
+	100% {
+		opacity: 0.45;
+		transform: translateX(0) translateY(0) rotate(-6deg);
+	}
+	50% {
+		opacity: 0.82;
+		transform: translateX(1.5px) translateY(-0.5px) rotate(2deg);
+	}
 }
 
 .wordmark-shell {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.1rem 0.2rem;
-  isolation: isolate;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.1rem 0.2rem;
+	isolation: isolate;
 }
 
 .wordmark-glow {
-  position: absolute;
-  inset: 0.3rem 0.6rem;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 30% 50%, rgb(179 122 52 / 0.18), transparent 52%),
-    radial-gradient(circle at 70% 45%, rgb(214 167 106 / 0.2), transparent 48%);
-  filter: blur(10px);
-  animation: wordmarkGlow 5.5s ease-in-out infinite;
-  z-index: 0;
+	position: absolute;
+	inset: 0.3rem 0.6rem;
+	border-radius: 999px;
+	background:
+		radial-gradient(circle at 30% 50%, rgb(179 122 52 / 0.18), transparent 52%),
+		radial-gradient(circle at 70% 45%, rgb(214 167 106 / 0.2), transparent 48%);
+	filter: blur(10px);
+	animation: wordmarkGlow 5.5s ease-in-out infinite;
+	z-index: 0;
 }
 
 .wordmark-float {
-  animation: wordmarkFloat 6s ease-in-out infinite;
-  transform-origin: center;
+	animation: wordmarkFloat 6s ease-in-out infinite;
+	transform-origin: center;
 }
 
 .wordmark-signature {
-  animation: wordmarkInk 7.5s ease-in-out infinite;
-  transform-origin: center;
+	animation: wordmarkInk 7.5s ease-in-out infinite;
+	transform-origin: center;
 }
 
 .wordmark-trail {
-  stroke-dasharray: 72 44;
-  animation: wordmarkTrail 7s linear infinite;
+	stroke-dasharray: 72 44;
+	animation: wordmarkTrail 7s linear infinite;
 }
 
 .wordmark-flick {
-  animation: wordmarkFlick 4.6s ease-in-out infinite;
-  transform-origin: center;
+	animation: wordmarkFlick 4.6s ease-in-out infinite;
+	transform-origin: center;
 }
 
 .border-bleed-card {
-  position: relative;
+	position: relative;
 }
 
 .border-bleed-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgb(var(--ink-accent) / 0.16) 12%,
-    rgb(var(--ink-accent) / 0.92) 50%,
-    rgb(var(--ink-accent) / 0.16) 88%,
-    transparent 100%
-  );
-  opacity: 0.85;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 1px;
+	background: linear-gradient(
+		to bottom,
+		transparent 0%,
+		rgb(var(--ink-accent) / 0.16) 12%,
+		rgb(var(--ink-accent) / 0.92) 50%,
+		rgb(var(--ink-accent) / 0.16) 88%,
+		transparent 100%
+	);
+	opacity: 0.85;
 }

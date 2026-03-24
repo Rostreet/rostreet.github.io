@@ -25,4 +25,4 @@ jobs:
         run: bun run check
 
       - name: Run Biome Format Check
-        run: bunx @biomejs/biome format .
+        run: bunx @biomejs/biome format --check .
