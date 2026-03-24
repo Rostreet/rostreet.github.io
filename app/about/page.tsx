@@ -2,16 +2,7 @@ import { Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 
 export default function AboutPage() {
-  const skills = ["JavaScript", "Typecript", "Node.js", "Golang", "Git"];
-
-  const interests = [
-    "全栈开发",
-    "ai & agent",
-    "计算机底层原理",
-    "算法",
-    "音乐",
-    "跑步",
-  ];
+  const skills = ["Typescript", "Node.js", "Golang", "Python", "Git"];
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
@@ -30,11 +21,11 @@ export default function AboutPage() {
             <section>
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  你好！目前我是一名前端/全栈开发者，也是一名HZAU的大三学生
+                  你好！目前我是一名全栈开发者，也是一名HZAU的大三学生
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   在日常工作 / 学习中，我主要使用 React、Next.js 和 Node.js
-                  进行开发， 目前在学习golang来作为后端的开发语言，
+                  进行开发， 目前在学习Golang/Python，
                   我相信语言只是工具，主要目标是理解业务并解决问题
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
@@ -90,21 +81,6 @@ export default function AboutPage() {
                 </li>
               </ol>
             </section>
-
-            <section>
-              <h2 className="text-2xl font-bold mb-4">兴趣爱好</h2>
-              <ul className="grid grid-cols-2 gap-2">
-                {interests.map((interest) => (
-                  <li
-                    key={interest}
-                    className="flex items-center gap-2 text-muted-foreground"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    {interest}
-                  </li>
-                ))}
-              </ul>
-            </section>
           </div>
 
           {/* Sidebar */}
@@ -146,9 +122,6 @@ export default function AboutPage() {
         <section className="mt-16 pt-8 border-t border-border/40">
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">联系我</h2>
-            <p className="text-muted-foreground mb-6">
-              无论你是对我还是我的工作感兴趣，还是想要讨论某个项目，或者正在招人
-            </p>
             <div className="flex justify-center gap-4">
               <a
                 href="mailto:feaaizch1001@gmail.com"

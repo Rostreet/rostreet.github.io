@@ -204,6 +204,100 @@ html {
 	animation: waterfall 0.8s ease-out;
 }
 
+@keyframes wordmarkFloat {
+	0%,
+	100% {
+		transform: translateY(0) scale(1);
+	}
+	50% {
+		transform: translateY(-1.5px) scale(1.015);
+	}
+}
+
+@keyframes wordmarkGlow {
+	0%,
+	100% {
+		opacity: 0.22;
+		transform: scale(0.96);
+	}
+	50% {
+		opacity: 0.42;
+		transform: scale(1.03);
+	}
+}
+
+@keyframes wordmarkTrail {
+	from {
+		stroke-dashoffset: 0;
+	}
+	to {
+		stroke-dashoffset: -144;
+	}
+}
+
+@keyframes wordmarkInk {
+	0%,
+	100% {
+		transform: rotate(-2deg) translateY(0) skewX(-2deg);
+	}
+	50% {
+		transform: rotate(1.2deg) translateY(-1px) skewX(1deg);
+	}
+}
+
+@keyframes wordmarkFlick {
+	0%,
+	100% {
+		opacity: 0.45;
+		transform: translateX(0) translateY(0) rotate(-6deg);
+	}
+	50% {
+		opacity: 0.82;
+		transform: translateX(1.5px) translateY(-0.5px) rotate(2deg);
+	}
+}
+
+.wordmark-shell {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.1rem 0.2rem;
+	isolation: isolate;
+}
+
+.wordmark-glow {
+	position: absolute;
+	inset: 0.3rem 0.6rem;
+	border-radius: 999px;
+	background:
+		radial-gradient(circle at 30% 50%, rgb(179 122 52 / 0.18), transparent 52%),
+		radial-gradient(circle at 70% 45%, rgb(214 167 106 / 0.2), transparent 48%);
+	filter: blur(10px);
+	animation: wordmarkGlow 5.5s ease-in-out infinite;
+	z-index: 0;
+}
+
+.wordmark-float {
+	animation: wordmarkFloat 6s ease-in-out infinite;
+	transform-origin: center;
+}
+
+.wordmark-signature {
+	animation: wordmarkInk 7.5s ease-in-out infinite;
+	transform-origin: center;
+}
+
+.wordmark-trail {
+	stroke-dasharray: 72 44;
+	animation: wordmarkTrail 7s linear infinite;
+}
+
+.wordmark-flick {
+	animation: wordmarkFlick 4.6s ease-in-out infinite;
+	transform-origin: center;
+}
+
 /* 浸染边框卡片样式 */
 .border-bleed-card {
 	position: relative;
