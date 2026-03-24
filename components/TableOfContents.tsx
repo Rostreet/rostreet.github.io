@@ -107,8 +107,8 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2 text-sm font-semibold text-foreground sticky top-0 py-2">
+    <div className="section-divider space-y-4 pt-4">
+      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
         <List className="w-4 h-4" />
         <span>目录</span>
       </div>
@@ -119,7 +119,7 @@ export default function TableOfContents({ content }: TableOfContentsProps) {
             href={`#${heading.id}`}
             onClick={(e) => handleClick(e, heading.id)}
             className={`
-              block text-sm py-1.5 px-3 rounded-lg
+              block text-sm py-1.5
               transition-all duration-200
               border-l-2
               ${

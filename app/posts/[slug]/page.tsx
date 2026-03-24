@@ -80,8 +80,8 @@ export default async function BlogPost({
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-3xl font-bold mb-4">文章未找到</h1>
-          <Link href="/" className="text-primary hover:underline">
-            返回首页
+          <Link href="/blog" className="text-foreground hover:underline">
+            返回 Blog
           </Link>
         </div>
       </div>
@@ -89,107 +89,100 @@ export default async function BlogPost({
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 md:py-16">
       <ReadingProgressBar />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Main Content */}
-        <article className="lg:col-span-9 max-w-none animate-fade-in">
-          {/* Back Button */}
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-200 mb-8 group"
-          >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-            返回首页
-          </Link>
-
-          {/* Article Header */}
-          <header className="mb-12">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
-              {post.title}
-            </h1>
-
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                <span className="px-3 py-1 rounded-full bg-accent text-foreground font-medium">
-                  {post.category}
-                </span>
-                <span className="text-muted-foreground/50">·</span>
-                <span className="flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5" />
-                  {post.date}
-                </span>
-                <span className="text-muted-foreground/50">·</span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5" />
-                  {post.readTime}
-                </span>
-              </div>
-              <ShareButton title={post.title} />
-            </div>
-          </header>
-
-          {/* Article Content */}
-          <div className="border-t border-border/40 pt-8">
-            <div
-              className="prose prose-lg dark:prose-invert max-w-none
-            prose-headings:font-bold prose-headings:text-foreground
-            prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-4 prose-h1:first:mt-0
-            prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
-            prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
-            prose-p:text-muted-foreground prose-p:leading-7 prose-p:mb-4
-            prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-            prose-strong:text-foreground prose-strong:font-semibold
-            prose-code:text-foreground prose-code:bg-accent prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
-            prose-pre:bg-muted prose-pre:border prose-pre:border-border/40
-            prose-ul:text-muted-foreground prose-ul:ml-6
-            prose-ol:text-muted-foreground prose-ol:ml-6
-            prose-li:text-muted-foreground
-            prose-blockquote:border-l-4 prose-blockquote:border-border/40 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground
-          "
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_240px]">
+          <article className="min-w-0 animate-fade-in">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground group"
             >
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={{
-                  h1: (props) => <Heading level={1} {...props} />,
-                  h2: (props) => <Heading level={2} {...props} />,
-                  h3: (props) => <Heading level={3} {...props} />,
-                  h4: (props) => <Heading level={4} {...props} />,
-                  h5: (props) => <Heading level={5} {...props} />,
-                  h6: (props) => <Heading level={6} {...props} />,
-                }}
-              >
-                {post.content}
-              </ReactMarkdown>
-            </div>
-          </div>
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+              返回 Blog
+            </Link>
 
-          {/* Article Footer */}
-          <footer className="mt-16 pt-8 border-t border-border/40">
-            <div className="flex flex-col sm:flex-row justify-between gap-4">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-200"
+            <header className="mt-8">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+                Blog
+              </p>
+              <h1 className="mt-4 text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+                {post.title}
+              </h1>
+
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  <span className="font-medium text-foreground/84">
+                    {post.category}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5" />
+                    {post.date}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5" />
+                    {post.readTime}
+                  </span>
+                </div>
+                <ShareButton title={post.title} />
+              </div>
+            </header>
+
+            <div className="section-divider mt-10 pt-8">
+              <div
+                className="prose prose-lg dark:prose-invert max-w-none
+              prose-headings:font-bold prose-headings:text-foreground
+              prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-4 prose-h1:first:mt-0
+              prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+              prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
+              prose-p:text-muted-foreground prose-p:leading-7 prose-p:mb-4
+              prose-a:text-foreground prose-a:no-underline hover:prose-a:underline
+              prose-strong:text-foreground prose-strong:font-semibold
+              prose-code:text-foreground prose-code:bg-accent prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+              prose-pre:bg-muted prose-pre:border prose-pre:border-border/40
+              prose-ul:text-muted-foreground prose-ul:ml-6
+              prose-ol:text-muted-foreground prose-ol:ml-6
+              prose-li:text-muted-foreground
+              prose-blockquote:border-l-4 prose-blockquote:border-border/40 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground
+            "
               >
-                <ArrowLeft className="w-4 h-4" />
-                返回首页
-              </Link>
-              <div className="flex gap-4">
-                <span className="text-muted-foreground">感谢阅读！</span>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    h1: (props) => <Heading level={1} {...props} />,
+                    h2: (props) => <Heading level={2} {...props} />,
+                    h3: (props) => <Heading level={3} {...props} />,
+                    h4: (props) => <Heading level={4} {...props} />,
+                    h5: (props) => <Heading level={5} {...props} />,
+                    h6: (props) => <Heading level={6} {...props} />,
+                  }}
+                >
+                  {post.content}
+                </ReactMarkdown>
               </div>
             </div>
-          </footer>
-        </article>
 
-        {/* Sidebar - Table of Contents */}
-        <aside className="hidden lg:block lg:col-span-3">
-          <div className="sticky top-24">
-            <TableOfContents content={post.content} />
-          </div>
-        </aside>
+            <footer className="section-divider mt-16 pt-8">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-2 text-muted-foreground transition-colors duration-200 hover:text-foreground"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  返回 Blog
+                </Link>
+                <span className="text-muted-foreground">感谢阅读。</span>
+              </div>
+            </footer>
+          </article>
+
+          <aside className="hidden lg:block">
+            <div className="sticky top-24">
+              <TableOfContents content={post.content} />
+            </div>
+          </aside>
+        </div>
       </div>
-
-      {/* Back to Top Button */}
       <BackToTop />
     </div>
   );

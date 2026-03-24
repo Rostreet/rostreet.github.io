@@ -19,11 +19,11 @@ export default function ShareButton({ title }: ShareButtonProps) {
   return (
     <button
       type="button"
-      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-border/40 hover:border-border/80 transition-all"
+      className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
       onClick={handleShare}
     >
       <Share2 className="w-4 h-4" />
-      <span className="hidden sm:inline">分享</span>
+      <span>分享</span>
     </button>
   );
 }

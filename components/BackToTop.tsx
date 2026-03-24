@@ -33,8 +33,8 @@ export default function BackToTop() {
       className={`
         fixed bottom-8 right-8 z-50
         inline-flex items-center justify-center
-        w-12 h-12 rounded-full
-        border border-border/40 hover:border-border/80
+        w-11 h-11 rounded-full
+        border border-border/50 bg-background/72 backdrop-blur-sm
         text-foreground
         transition-all duration-300
         ${
@@ -42,7 +42,7 @@ export default function BackToTop() {
             ? "opacity-100 translate-y-0 scale-100"
             : "opacity-0 translate-y-4 scale-90 pointer-events-none"
         }
-        hover:scale-110 active:scale-95
+        hover:border-foreground/20 hover:scale-105 active:scale-95
       `}
       aria-label="返回顶部"
     >

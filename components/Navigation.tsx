@@ -1,9 +1,10 @@
 "use client";
 
-import { Moon, Rss, Sun, Camera } from "lucide-react";
+import { Camera, Github, Mail, Moon, Rss, Sun } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { BilibiliIcon, JuejinIcon } from "@/components/Icons";
 
 function NavigationWordmark() {
   return (
@@ -139,14 +140,14 @@ export default function Navigation() {
   };
 
   const navItems = [
-    { href: "/", label: "首页" },
-    { href: "/about", label: "关于" },
+    { href: "/blog", label: "Blog" },
+    { href: "/projects", label: "Project" },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/86 backdrop-blur-xl">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 items-center justify-between gap-4">
           <Link
             href="/"
             className="group inline-flex items-center"
@@ -155,20 +156,21 @@ export default function Navigation() {
             <NavigationWordmark />
           </Link>
 
-          <div className="flex items-center space-x-1 sm:space-x-2">
+          <div className="flex min-w-0 items-center justify-end gap-0.5 overflow-x-auto whitespace-nowrap [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-1">
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive =
+                pathname === item.href ||
+                (item.href !== "/" && pathname.startsWith(`${item.href}/`));
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={`
-                    inline-flex items-center px-4 py-2 rounded-lg
-                    text-sm font-medium transition-all duration-200
+                    relative inline-flex h-9 items-center px-2.5 text-sm font-medium transition-colors duration-200 sm:px-3
                     ${
                       isActive
-                        ? "text-foreground bg-accent"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                        ? "text-foreground after:absolute after:inset-x-2 after:-bottom-px after:h-px after:bg-foreground/70"
+                        : "text-muted-foreground hover:text-foreground"
                     }
                   `}
                 >
@@ -176,15 +178,57 @@ export default function Navigation() {
                 </Link>
               );
             })}
+            <span className="mx-1 hidden h-4 w-px bg-border/70 sm:block" />
+            <a
+              href="mailto:feaaizch1001@gmail.com"
+              className="hidden h-9 w-9 items-center justify-center rounded-full
+                text-muted-foreground hover:text-foreground sm:inline-flex
+                transition-all duration-200"
+              aria-label="Email"
+            >
+              <Mail className="w-5 h-5" />
+            </a>
+            <a
+              href="https://github.com/Rostreet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full
+                text-muted-foreground hover:text-foreground
+                transition-all duration-200"
+              aria-label="GitHub"
+            >
+              <Github className="w-5 h-5" />
+            </a>
+            <a
+              href="https://space.bilibili.com/285033804"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden h-9 w-9 items-center justify-center rounded-full
+                text-muted-foreground hover:text-foreground sm:inline-flex
+                transition-all duration-200"
+              aria-label="Bilibili"
+            >
+              <BilibiliIcon className="w-5 h-5" />
+            </a>
+            <a
+              href="https://juejin.cn/user/3600253306288539"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden h-9 w-9 items-center justify-center rounded-full
+                text-muted-foreground hover:text-foreground md:inline-flex
+                transition-all duration-200"
+              aria-label="稀土掘金"
+            >
+              <JuejinIcon className="w-5 h-5" />
+            </a>
             <Link
               href="/interests"
               className={`
-                inline-flex items-center justify-center p-2 rounded-lg
-                transition-all duration-200
+                inline-flex h-9 w-9 items-center justify-center rounded-full transition-colors duration-200
                 ${
                   pathname === "/interests"
-                    ? "text-foreground bg-accent"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }
               `}
               aria-label="摄影"
@@ -196,8 +240,8 @@ export default function Navigation() {
               href="/rss.xml"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center p-2 rounded-lg
-                text-muted-foreground hover:text-foreground hover:bg-accent/50
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full
+                text-muted-foreground hover:text-foreground
                 transition-all duration-200"
               aria-label="RSS 订阅"
             >
@@ -206,8 +250,8 @@ export default function Navigation() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="inline-flex items-center justify-center p-2 rounded-lg
-                text-muted-foreground hover:text-foreground hover:bg-accent/50
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full
+                text-muted-foreground hover:text-foreground
                 transition-all duration-200"
               aria-label="Toggle theme"
               disabled={!mounted}

@@ -1,15 +1,15 @@
 export default function PostCardSkeleton() {
   return (
-    <div className="block rounded-xl border border-border/40 bg-card animate-pulse">
-      <div className="p-6 space-y-4">
+    <div className="animate-pulse border-b border-border/40 py-8">
+      <div className="space-y-4">
         <div className="flex items-center gap-3">
-          <div className="h-5 w-16 rounded bg-muted/50"></div>
-          <div className="h-5 w-24 rounded bg-muted/50"></div>
-          <div className="h-5 w-20 rounded bg-muted/50"></div>
+          <div className="h-4 w-14 rounded-full bg-muted/60" />
+          <div className="h-4 w-24 rounded-full bg-muted/50" />
+          <div className="h-4 w-16 rounded-full bg-muted/40" />
         </div>
-        <div className="h-6 w-3/4 rounded bg-muted/30"></div>
-        <div className="h-4 w-full rounded bg-muted/20"></div>
-        <div className="h-4 w-2/3 rounded bg-muted/20"></div>
+        <div className="h-8 w-2/3 rounded bg-muted/40" />
+        <div className="h-4 w-full rounded bg-muted/30" />
+        <div className="h-4 w-4/5 rounded bg-muted/25" />
       </div>
     </div>
   );

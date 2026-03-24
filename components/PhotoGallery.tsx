@@ -20,7 +20,7 @@ export default function PhotoGallery({ photos }: PhotoGalleryProps) {
           <button
             type="button"
             key={photo.id}
-            className="relative group cursor-pointer overflow-hidden rounded-lg border border-border/40 bg-card animate-waterfall break-inside-avoid mb-3 w-full"
+            className="relative group cursor-pointer overflow-hidden rounded-[1rem] animate-waterfall break-inside-avoid mb-3 w-full"
             style={{
               animationDelay: `${index * 50}ms`,
             }}
@@ -82,7 +82,7 @@ function PhotoModal({ photo, onClose }: { photo: Photo; onClose: () => void }) {
       tabIndex={-1}
     >
       <div
-        className="relative max-w-6xl w-full max-h-[90vh] bg-card rounded-xl border border-border/40 overflow-hidden shadow-2xl animate-slide-in"
+        className="relative max-w-6xl w-full max-h-[90vh] overflow-hidden rounded-[1.5rem] border border-border/50 bg-background/92 shadow-2xl animate-slide-in"
         onClick={(e) => e.stopPropagation()}
         onKeyDown={(e) => {
           if (e.key === "Escape") {
@@ -91,15 +91,15 @@ function PhotoModal({ photo, onClose }: { photo: Photo; onClose: () => void }) {
           }
         }}
         role="document"
-      >
-        {/* 关闭按钮 */}
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-background/80 hover:bg-background text-foreground transition-all duration-200 hover:scale-110"
-          aria-label="关闭"
         >
-          <X className="w-6 h-6" />
+          {/* 关闭按钮 */}
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute top-4 right-4 z-10 rounded-full border border-border/50 bg-background/72 p-2 text-foreground transition-all duration-200 hover:scale-105"
+            aria-label="关闭"
+          >
+            <X className="w-6 h-6" />
         </button>
 
         <div className="flex flex-col lg:flex-row max-h-[90vh]">
@@ -116,7 +116,7 @@ function PhotoModal({ photo, onClose }: { photo: Photo; onClose: () => void }) {
           </div>
 
           {/* 右侧：信息展示区 */}
-          <div className="lg:w-96 p-6 lg:p-8 bg-card overflow-y-auto">
+          <div className="lg:w-96 overflow-y-auto border-t border-border/30 p-6 lg:border-l lg:border-t-0 lg:p-8">
             <h2 className="text-2xl font-bold mb-6">{photo.title}</h2>
 
             <div className="space-y-4">
